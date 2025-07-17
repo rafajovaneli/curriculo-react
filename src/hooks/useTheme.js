@@ -24,12 +24,16 @@ export const useTheme = () => {
   }, []);
 
   useEffect(() => {
+    // Apply theme to both body and html for better coverage
+    document.documentElement.className = darkMode
+      ? "dark-theme"
+      : "light-theme";
     document.body.className = darkMode ? "dark-theme" : "light-theme";
     localStorage.setItem("theme", darkMode ? "dark" : "light");
 
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute("content", darkMode ? "#000000" : "#ffffff");
+      metaThemeColor.setAttribute("content", darkMode ? "#0f172a" : "#ffffff");
     }
   }, [darkMode]);
 
