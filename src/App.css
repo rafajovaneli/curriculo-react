@@ -3230,3 +3230,268 @@ canvas {
   transform: translateZ(0);
   will-change: transform, opacity;
 }
+/* Advanced Responsiveness Improvements */
+
+/* Container Queries for adaptive components */
+@container (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+@container (max-width: 767px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .contact-card {
+    padding: 2rem 1.5rem;
+    min-height: 200px;
+    touch-action: manipulation;
+  }
+
+  .contact-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-tertiary {
+    min-height: 48px;
+    padding: 14px 28px;
+    touch-action: manipulation;
+  }
+
+  .floating-contact-btn {
+    width: 56px;
+    height: 56px;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  /* Disable hover effects on touch devices */
+  .contact-card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-tertiary:hover {
+    transform: none;
+    box-shadow: initial;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .contact-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  canvas {
+    image-rendering: pixelated;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+/* Foldable devices support */
+@media (max-width: 280px) {
+  .contact-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-buttons {
+    gap: 0.75rem;
+  }
+
+  .hero-buttons button {
+    font-size: 0.85rem;
+    padding: 12px 20px;
+  }
+}
+
+/* Large screens optimization */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+
+  .contact-grid {
+    gap: 3rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 6vw, 5rem);
+  }
+}
+
+/* Print styles */
+@media print {
+  .particle-system,
+  .matrix-particles,
+  .floating-contact-btn,
+  .navbar {
+    display: none !important;
+  }
+
+  .contact-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+}
+/* Skip Links for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.3s ease;
+  font-size: 14px;
+}
+
+.skip-link:focus {
+  top: 6px;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.skip-link:hover {
+  background: var(--primary-dark);
+  color: white;
+  text-decoration: none;
+}
+
+.dark-theme .skip-link {
+  background: #00ff41;
+  color: #000;
+}
+
+.dark-theme .skip-link:hover {
+  background: #00cc33;
+  color: #000;
+}
+
+/* Enhanced Focus States */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dark-theme *:focus-visible {
+  outline-color: #00ff41;
+}
+
+/* Improved Button Focus */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-tertiary:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 2px;
+}
+
+.dark-theme .btn-primary:focus-visible,
+.dark-theme .btn-secondary:focus-visible,
+.dark-theme .btn-tertiary:focus-visible {
+  outline-color: rgba(0, 255, 65, 0.7);
+}
+
+/* Navigation Focus States */
+.nav-center button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 4px;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.dark-theme .nav-center button:focus-visible {
+  outline-color: #00ff41;
+  background: rgba(0, 255, 65, 0.1);
+}
+
+/* Contact Card Focus States */
+.contact-card:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+  transform: translateY(-2px);
+}
+
+.dark-theme .contact-card:focus-visible {
+  outline-color: #00ff41;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+
+  *:focus-visible {
+    transition: none;
+  }
+
+  .contact-card:focus-visible {
+    transform: none;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: 2px solid currentColor;
+  }
+
+  *:focus-visible {
+    outline-width: 3px;
+    outline-style: solid;
+  }
+
+  .contact-card {
+    border: 1px solid currentColor;
+  }
+}

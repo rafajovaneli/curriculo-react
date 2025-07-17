@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Contact = () => {
+const Contact = React.memo(() => {
   const { t } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState(null);
   const [clickedCard, setClickedCard] = useState(null);
@@ -20,14 +20,14 @@ const Contact = () => {
     mapsUrl: "https://www.google.com/maps/place/Osasco,+SP,+Brazil",
   };
 
-  const showFeedback = (message, type = "success") => {
+  const showFeedback = useCallback((message, type = "success") => {
     setFeedback({ show: true, message, type });
     setTimeout(() => {
       setFeedback({ show: false, message: "", type: "" });
     }, 3000);
-  };
+  }, []);
 
-  const handlePhoneClick = async () => {
+  const handlePhoneClick = useCallback(async () => {
     setClickedCard("phone");
     try {
       const message = encodeURIComponent(t("whatsappMessage"));
@@ -45,9 +45,9 @@ const Contact = () => {
     }
 
     setTimeout(() => setClickedCard(null), 300);
-  };
+  }, [t, contactInfo.phoneNumber, contactInfo.phone, showFeedback]);
 
-  const handleEmailClick = async () => {
+  const handleEmailClick = useCallback(async () => {
     setClickedCard("email");
     try {
       const subject = encodeURIComponent(t("emailSubject"));
@@ -66,9 +66,9 @@ const Contact = () => {
     }
 
     setTimeout(() => setClickedCard(null), 300);
-  };
+  }, [t, contactInfo.email, showFeedback]);
 
-  const handleLocationClick = () => {
+  const handleLocationClick = useCallback(() => {
     setClickedCard("location");
     try {
       const opened = window.open(contactInfo.mapsUrl, "_blank");
@@ -81,9 +81,8 @@ const Contact = () => {
       showFeedback("Unable to open maps", "error");
     }
 
-    // Reset clicked state after animation
     setTimeout(() => setClickedCard(null), 300);
-  };
+  }, [contactInfo.mapsUrl, showFeedback]);
 
   return (
     <div className="contact-section">
@@ -100,7 +99,7 @@ const Contact = () => {
         <div className="section-underline"></div>
       </div>
 
-      <div className="contact-grid">
+      <div className="contact-grid" role="list">
         <motion.div
           className={`contact-card ${
             hoveredCard === "phone" ? "hovered" : ""
@@ -118,6 +117,17 @@ const Contact = () => {
           onClick={handlePhoneClick}
           onHoverStart={() => setHoveredCard("phone")}
           onHoverEnd={() => setHoveredCard(null)}
+          role="listitem"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handlePhoneClick();
+            }
+          }}
+          aria-label={`${t("phone")}: ${contactInfo.phone}. ${t(
+            "whatsappHint"
+          )}`}
         >
           <motion.div
             className="contact-icon whatsapp-icon"
@@ -165,6 +175,15 @@ const Contact = () => {
           onClick={handleEmailClick}
           onHoverStart={() => setHoveredCard("email")}
           onHoverEnd={() => setHoveredCard(null)}
+          role="listitem"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleEmailClick();
+            }
+          }}
+          aria-label={`${t("email")}: ${contactInfo.email}. ${t("emailHint")}`}
         >
           <motion.div
             className="contact-icon email-icon"
@@ -212,6 +231,17 @@ const Contact = () => {
           onClick={handleLocationClick}
           onHoverStart={() => setHoveredCard("location")}
           onHoverEnd={() => setHoveredCard(null)}
+          role="listitem"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleLocationClick();
+            }
+          }}
+          aria-label={`${t("location")}: ${contactInfo.location}. ${t(
+            "viewOnMaps"
+          )}`}
         >
           <motion.div
             className="contact-icon location-icon"
@@ -280,6 +310,6 @@ const Contact = () => {
       </AnimatePresence>
     </div>
   );
-};
+});
 
 export default Contact;

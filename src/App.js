@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { motion } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { usePerformance } from "./hooks/usePerformance";
+import { useTheme } from "./hooks/useTheme";
 import SEOHead from "./components/SEOHead";
 import PerformanceMonitor from "./components/PerformanceMonitor";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -56,7 +57,7 @@ const TechBackground = lazy(() =>
   import("./components/TechBackground").catch(() => ({ default: () => null }))
 );
 
-const LoadingSpinner = ({ text = "Loading..." }) => (
+const LoadingSpinner = React.memo(({ text = "Loading..." }) => (
   <div
     className="loading-spinner"
     role="status"
@@ -74,21 +75,13 @@ const LoadingSpinner = ({ text = "Loading..." }) => (
     </div>
     <span className="ms-2">{text}</span>
   </div>
-);
+));
 
 function AppContent() {
-  const [darkMode, setDarkMode] = useState(true);
+  const { darkMode, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { preloadResource, prefetchResource, dnsPrefetch, preconnect } =
     usePerformance();
-
-  useEffect(() => {
-    document.body.className = darkMode ? "dark-theme" : "light-theme";
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute("content", darkMode ? "#000000" : "#ffffff");
-    }
-  }, [darkMode]);
 
   useEffect(() => {
     preconnect("https://fonts.googleapis.com", true);
@@ -141,6 +134,16 @@ function AppContent() {
       />
       <PerformanceMonitor />
       <AccessibilityEnhancer />
+
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <a href="#navigation" className="skip-link">
+        Skip to navigation
+      </a>
+      <a href="#contact" className="skip-link">
+        Skip to contact
+      </a>
 
       <div
         className={darkMode ? "dark-theme" : "light-theme"}
@@ -313,16 +316,28 @@ function AppContent() {
           <div className="nav-container">
             <motion.div
               className="nav-brand"
-              role="img"
-              aria-label="Rafael Henrique Jovaneli"
+              role="button"
+              tabIndex={0}
+              aria-label="Rafael Henrique Jovaneli - Go to top"
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              onClick={() => scrollTo("main-content")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  scrollTo("main-content");
+                }
+              }}
             >
               RHJ
             </motion.div>
 
-            <div className="nav-center" role="menubar">
+            <div
+              className="nav-center"
+              role="menubar"
+              aria-label="Navigation menu"
+            >
               <motion.button
                 onClick={() => scrollTo("about")}
                 role="menuitem"
@@ -395,7 +410,7 @@ function AppContent() {
 
               <motion.button
                 className="theme-toggle"
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={toggleTheme}
                 title={
                   darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
                 }
