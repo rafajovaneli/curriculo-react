@@ -4,7 +4,9 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 function GraficoTecnologias() {
   const { t } = useLanguage();
-  const [expandedCategories, setExpandedCategories] = useState({});
+  const [expandedCategories, setExpandedCategories] = useState({
+    0: true, // Expand first category by default
+  });
 
   const toggleCategory = (categoryIndex) => {
     setExpandedCategories((prev) => ({
