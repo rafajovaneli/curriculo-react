@@ -1,0 +1,33 @@
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+h3 {
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.nav-link {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+.navbar-dark .btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+}
+
+.navbar-dark .btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-light .nav-link {
+  color: #000;
+}
