@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
-function Competencias() {
+const Competencias = memo(function Competencias() {
   const { t } = useLanguage();
 
   const competencias = [
@@ -139,6 +139,6 @@ function Competencias() {
       </div>
     </motion.div>
   );
-}
+});
 
 export default Competencias;

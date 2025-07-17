@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { motion } from "framer-motion";
@@ -7,71 +7,27 @@ import { useTheme } from "./hooks/useTheme";
 import SEOHead from "./components/SEOHead";
 import ErrorBoundary from "./components/ErrorBoundary";
 import TypingEffect from "./components/TypingEffect";
+import Competencias from "./components/Competencias";
+import GraficoTecnologias from "./components/GraficoTecnologias";
+import Sintese from "./components/Sintese";
+import Experiencias from "./components/Experiencias";
+import ProfessionalLinks from "./components/ProfessionalLinks";
+import Contact from "./components/Contact";
 import "./App.css";
-import "./styles/performance.css";
-import "./styles/animations.css";
-
-// Lazy load components with error handling
-const Competencias = lazy(() =>
-  import("./components/Competencias").catch(() => ({
-    default: () => <div className="error-message">Error loading Skills</div>,
-  }))
-);
-const GraficoTecnologias = lazy(() =>
-  import("./components/GraficoTecnologias").catch(() => ({
-    default: () => (
-      <div className="error-message">Error loading Technologies Chart</div>
-    ),
-  }))
-);
-const Sintese = lazy(() =>
-  import("./components/Sintese").catch(() => ({
-    default: () => <div className="error-message">Error loading Summary</div>,
-  }))
-);
-const Experiencias = lazy(() =>
-  import("./components/Experiencias").catch(() => ({
-    default: () => (
-      <div className="error-message">Error loading Experience</div>
-    ),
-  }))
-);
-const ProfessionalLinks = lazy(() =>
-  import("./components/ProfessionalLinks").catch(() => ({
-    default: () => (
-      <div className="error-message">Error loading Professional Links</div>
-    ),
-  }))
-);
-const Contact = lazy(() =>
-  import("./components/Contact").catch(() => ({
-    default: () => <div className="error-message">Error loading Contact</div>,
-  }))
-);
-
-const LoadingSpinner = React.memo(({ text = "Loading..." }) => (
-  <div
-    className="loading-spinner"
-    role="status"
-    aria-live="polite"
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "2rem",
-      minHeight: "200px",
-    }}
-  >
-    <div className="spinner-border" role="status">
-      <span className="visually-hidden">{text}</span>
-    </div>
-    <span className="ms-2">{text}</span>
-  </div>
-));
+import "./styles/optimized.css";
+import {
+  preloadCriticalResources,
+  getOptimizedAnimationConfig,
+} from "./utils/performance";
 
 function AppContent() {
   const { darkMode, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
+
+  // Preload critical resources on mount
+  useEffect(() => {
+    preloadCriticalResources();
+  }, []);
 
   const scrollTo = (id) => {
     const element = document.getElementById(id);
@@ -106,7 +62,7 @@ function AppContent() {
         id="main-content"
         role="main"
       >
-        {/* Simplified Hero Section */}
+        {/* Hero Section */}
         <motion.section
           className="hero-section"
           initial={{ opacity: 0 }}
@@ -193,7 +149,7 @@ function AppContent() {
           </div>
         </motion.section>
 
-        {/* Simplified Navigation */}
+        {/* Navigation */}
         <motion.nav
           className="navbar"
           id="navigation"
@@ -299,12 +255,12 @@ function AppContent() {
         {/* About Section */}
         <section id="about" className="section" aria-labelledby="about-heading">
           <div className="container">
-            <ErrorBoundary fallback={<div>Error loading About section</div>}>
-              <Suspense
-                fallback={<LoadingSpinner text="Loading About Section..." />}
-              >
-                <Sintese />
-              </Suspense>
+            <ErrorBoundary
+              fallback={
+                <div className="error-message">Error loading About section</div>
+              }
+            >
+              <Sintese />
             </ErrorBoundary>
           </div>
         </section>
@@ -318,25 +274,23 @@ function AppContent() {
           <div className="container">
             <div className="skills-grid">
               <div className="skills-left">
-                <ErrorBoundary fallback={<div>Error loading Skills</div>}>
-                  <Suspense
-                    fallback={<LoadingSpinner text="Loading Skills..." />}
-                  >
-                    <Competencias />
-                  </Suspense>
+                <ErrorBoundary
+                  fallback={
+                    <div className="error-message">Error loading Skills</div>
+                  }
+                >
+                  <Competencias />
                 </ErrorBoundary>
               </div>
               <div className="skills-right">
                 <ErrorBoundary
-                  fallback={<div>Error loading Technologies Chart</div>}
+                  fallback={
+                    <div className="error-message">
+                      Error loading Technologies Chart
+                    </div>
+                  }
                 >
-                  <Suspense
-                    fallback={
-                      <LoadingSpinner text="Loading Technologies Chart..." />
-                    }
-                  >
-                    <GraficoTecnologias />
-                  </Suspense>
+                  <GraficoTecnologias />
                 </ErrorBoundary>
               </div>
             </div>
@@ -350,12 +304,12 @@ function AppContent() {
           aria-labelledby="experience-heading"
         >
           <div className="container">
-            <ErrorBoundary fallback={<div>Error loading Experience</div>}>
-              <Suspense
-                fallback={<LoadingSpinner text="Loading Experience..." />}
-              >
-                <Experiencias />
-              </Suspense>
+            <ErrorBoundary
+              fallback={
+                <div className="error-message">Error loading Experience</div>
+              }
+            >
+              <Experiencias />
             </ErrorBoundary>
           </div>
         </section>
@@ -368,15 +322,13 @@ function AppContent() {
         >
           <div className="container">
             <ErrorBoundary
-              fallback={<div>Error loading Professional Links</div>}
+              fallback={
+                <div className="error-message">
+                  Error loading Professional Links
+                </div>
+              }
             >
-              <Suspense
-                fallback={
-                  <LoadingSpinner text="Loading Professional Links..." />
-                }
-              >
-                <ProfessionalLinks />
-              </Suspense>
+              <ProfessionalLinks />
             </ErrorBoundary>
           </div>
         </section>
@@ -388,10 +340,12 @@ function AppContent() {
           aria-labelledby="contact-heading"
         >
           <div className="container">
-            <ErrorBoundary fallback={<div>Error loading Contact</div>}>
-              <Suspense fallback={<LoadingSpinner text="Loading Contact..." />}>
-                <Contact />
-              </Suspense>
+            <ErrorBoundary
+              fallback={
+                <div className="error-message">Error loading Contact</div>
+              }
+            >
+              <Contact />
             </ErrorBoundary>
           </div>
         </section>

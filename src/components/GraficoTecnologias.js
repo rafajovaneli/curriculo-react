@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
-function GraficoTecnologias() {
+const GraficoTecnologias = memo(function GraficoTecnologias() {
   const { t } = useLanguage();
   const [expandedCategories, setExpandedCategories] = useState({
     0: true, // Expand first category by default
@@ -326,6 +326,6 @@ function GraficoTecnologias() {
       </div>
     </motion.div>
   );
-}
+});
 
 export default GraficoTecnologias;

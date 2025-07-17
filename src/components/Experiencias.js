@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, memo, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
-function Experiencias() {
+const Experiencias = memo(function Experiencias() {
   const { language, t } = useLanguage();
   const [expandedExperiences, setExpandedExperiences] = useState({});
   const [activeExperience, setActiveExperience] = useState(0);
@@ -227,7 +227,7 @@ function Experiencias() {
     ],
   };
 
-  const experiencias = experienciasData[language];
+  const experiencias = useMemo(() => experienciasData[language], [language]);
 
   return (
     <motion.div
@@ -325,6 +325,6 @@ function Experiencias() {
       </div>
     </motion.div>
   );
-}
+});
 
 export default Experiencias;
