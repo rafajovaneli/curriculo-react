@@ -21,6 +21,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer SINQIA - Cliente SOMPO Seguros",
         periodo: "Dezembro 2023 – Atual",
+        resumo:
+          "Melhorias no ecossistema de cotação e endosso para seguros automotivos em ambiente enterprise.",
+        stack: ["Java", "Jenkins", "SQL Server", "Tomcat/JBoss/WebSphere"],
+        contexto: "Seguros",
+        destaques: [
+          "Evolução do sistema de cotação e endosso.",
+          "Atuação em arquitetura web, testes unitários e pipelines.",
+        ],
         atividades: [
           "JAVA – Projeto SOMPO implementação de melhorias no sistema de cotação e endosso.",
           "Desenvolvimento e melhorias voltadas para o ambiente de seguros Automotivos.",
@@ -37,6 +45,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer NAVA - Cliente Santander",
         periodo: "Fevereiro 2023 – Dezembro 2023",
+        resumo:
+          "Integração cloud para cartões com foco em mensageria, containers e fluxo MainframeXCloud.",
+        stack: ["Java", "Spring Boot", "Camel", "Kafka", "OpenShift"],
+        contexto: "Banco",
+        destaques: [
+          "Integração entre sistemas internos e cloud para cartões.",
+          "Implementação de roteamento, mensageria e observabilidade.",
+        ],
         atividades: [
           "JAVA – Projeto SANTANDER integração cloud cartões.",
           "Desenvolvimento e melhorias voltadas para ambiente de Integração interna MainframeXCloud.",
@@ -53,6 +69,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Reply - Cliente Acesstage",
         periodo: "Junho 2022 – Fevereiro 2023",
+        resumo:
+          "Soluções para conta digital e pagamentos com foco em Pix, TED e boletos.",
+        stack: ["Java", "Spring Boot", "Hibernate/JPA", "GitLab", "SQL Server"],
+        contexto: "Fintech",
+        destaques: [
+          "Melhorias em produtos de conta digital e pagamentos.",
+          "Atuação em persistência, banco de dados e pipelines.",
+        ],
         atividades: [
           "JAVA – Projeto ACESSTAGE integração de banco digital e pix.",
           "Desenvolvimento e melhorias voltadas para ambiente de Contas bancárias digital (Pix, Ted, Emissão e Pagamento de boleto bancário).",
@@ -67,6 +91,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Reply - Cliente Ame Digital",
         periodo: "Dezembro 2021 – Junho 2022",
+        resumo:
+          "Desenvolvimento em motor antifraude com arquitetura reativa e forte observabilidade.",
+        stack: ["Java", "Spring WebFlux", "DataDog", "Kibana", "Gradle"],
+        contexto: "Antifraude",
+        destaques: [
+          "Entrega em ambiente crítico de risco e antifraude.",
+          "Uso de WebFlux, observabilidade e segurança de dependências.",
+        ],
         atividades: [
           "JAVA – Projeto AME DIGITAL Anti Fraude.",
           "Desenvolvimento e melhorias voltadas para o ambiente de antifraude (Risc - Hub).",
@@ -84,6 +116,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Wipro - Cliente Bradesco",
         periodo: "Março 2021 – Dezembro 2021",
+        resumo:
+          "Projetos corporativos para ambiente financeiro com Java Web, Azure e práticas ágeis.",
+        stack: ["Java", "Spring Boot", "JSF PrimeFaces", "Azure", "Cucumber"],
+        contexto: "Banco",
+        destaques: [
+          "Atuação full stack em contexto estrutural e financeiro.",
+          "Experiência com testes integrados, Sonar e servidores Java.",
+        ],
         atividades: [
           "JAVA – Projeto BRADESCO.",
           "Experiência com metodologias Ágeis (Scrum, Agile, Kanban, Refinamento, Daily, Retrospective/Review).",
@@ -105,6 +145,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer K2 - Cliente Sura Seguros",
         periodo: "Junho 2018 – Fevereiro 2021",
+        resumo:
+          "Soluções para seguros Property e Auto com Java Web, cloud e sustentação enterprise.",
+        stack: ["Java", "Spring Boot", "AWS", "Azure", "SQL Server"],
+        contexto: "Seguros",
+        destaques: [
+          "Entrega para linhas de seguros patrimonial e automotivo.",
+          "Experiência em cloud, arquitetura web e qualidade de código.",
+        ],
         atividades: [
           "JAVA – Projeto SURA Seguros.",
           "Experiência com metodologias Ágeis (Scrum, Agile, Kanban, Refinamento, Daily, Retrospective/Review).",
@@ -125,6 +173,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer SINQIA - SOMPO Insurance Client",
         periodo: "December 2023 – Present",
+        resumo:
+          "Enhancements for quotation and endorsement systems in an enterprise automotive insurance environment.",
+        stack: ["Java", "Jenkins", "SQL Server", "Tomcat/JBoss/WebSphere"],
+        contexto: "Insurance",
+        destaques: [
+          "Improved quotation and endorsement workflows.",
+          "Worked across web architecture, unit tests and delivery pipelines.",
+        ],
         atividades: [
           "JAVA – SOMPO project implementing improvements in quotation and endorsement system.",
           "Development and improvements focused on Automotive insurance environment.",
@@ -141,6 +197,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer NAVA - Santander Client",
         periodo: "February 2023 – December 2023",
+        resumo:
+          "Cloud integration for cards, focused on messaging, containers and MainframeXCloud flows.",
+        stack: ["Java", "Spring Boot", "Camel", "Kafka", "OpenShift"],
+        contexto: "Banking",
+        destaques: [
+          "Integrated internal systems with cloud card platforms.",
+          "Delivered routing, messaging and observability capabilities.",
+        ],
         atividades: [
           "JAVA – SANTANDER project cloud cards integration.",
           "Development and improvements focused on internal MainframeXCloud Integration environment.",
@@ -157,6 +221,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Reply - Acesstage Client",
         periodo: "June 2022 – February 2023",
+        resumo:
+          "Solutions for digital banking and payments, including Pix, wire transfer and bill flows.",
+        stack: ["Java", "Spring Boot", "Hibernate/JPA", "GitLab", "SQL Server"],
+        contexto: "Fintech",
+        destaques: [
+          "Improved digital account and payment products.",
+          "Worked on persistence, databases and delivery pipelines.",
+        ],
         atividades: [
           "JAVA – ACESSTAGE project digital bank and pix integration.",
           "Development and improvements focused on digital bank accounts environment (Pix, Ted, Bank slip issuance and payment).",
@@ -171,6 +243,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Reply - Ame Digital Client",
         periodo: "December 2021 – June 2022",
+        resumo:
+          "Anti-fraud platform development with reactive architecture and strong observability.",
+        stack: ["Java", "Spring WebFlux", "DataDog", "Kibana", "Gradle"],
+        contexto: "Anti-fraud",
+        destaques: [
+          "Delivered in a critical risk and anti-fraud environment.",
+          "Used WebFlux, observability tooling and dependency security checks.",
+        ],
         atividades: [
           "JAVA – AME DIGITAL Anti Fraud project.",
           "Development and improvements focused on anti-fraud environment (Risk - Hub).",
@@ -188,6 +268,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer Wipro - Bradesco Client",
         periodo: "March 2021 – December 2021",
+        resumo:
+          "Corporate financial projects with Java Web, Azure and agile delivery practices.",
+        stack: ["Java", "Spring Boot", "JSF PrimeFaces", "Azure", "Cucumber"],
+        contexto: "Banking",
+        destaques: [
+          "Full-stack delivery in structural and financial domains.",
+          "Hands-on work with integrated tests, Sonar and Java app servers.",
+        ],
         atividades: [
           "JAVA – BRADESCO project.",
           "Experience with Agile methodologies (Scrum, Agile, Kanban, Refinement, Daily, Retrospective/Review).",
@@ -209,6 +297,14 @@ const Experiencias = memo(function Experiencias() {
       {
         empresa: "Developer K2 - Sura Insurance Client",
         periodo: "June 2018 – February 2021",
+        resumo:
+          "Insurance solutions for Property and Auto with Java Web, cloud and enterprise support.",
+        stack: ["Java", "Spring Boot", "AWS", "Azure", "SQL Server"],
+        contexto: "Insurance",
+        destaques: [
+          "Delivered for property and automotive insurance lines.",
+          "Experience across cloud, web architecture and code quality.",
+        ],
         atividades: [
           "JAVA – SURA Insurance project.",
           "Experience with Agile methodologies (Scrum, Agile, Kanban, Refinement, Daily, Retrospective/Review).",
@@ -286,6 +382,40 @@ const Experiencias = memo(function Experiencias() {
                 <div className="timeline-period">{exp.periodo}</div>
               </div>
 
+              <p className="timeline-summary">{exp.resumo}</p>
+
+              <div className="timeline-preview-grid">
+                <div className="timeline-preview-card">
+                  <span className="timeline-preview-label">
+                    {t("experienceDomainLabel")}
+                  </span>
+                  <strong>{exp.contexto}</strong>
+                </div>
+                <div className="timeline-preview-card timeline-preview-card-stack">
+                  <span className="timeline-preview-label">
+                    {t("experienceStackLabel")}
+                  </span>
+                  <div className="timeline-stack-chips">
+                    {exp.stack.map((item) => (
+                      <span key={item} className="timeline-stack-chip">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="timeline-highlights">
+                <span className="timeline-preview-label">
+                  {t("experienceHighlightsLabel")}
+                </span>
+                <ul>
+                  {exp.destaques.map((destaque) => (
+                    <li key={destaque}>{destaque}</li>
+                  ))}
+                </ul>
+              </div>
+
               {/* Expand/Collapse Icon */}
               <motion.div
                 className="timeline-expand-icon"
@@ -295,6 +425,11 @@ const Experiencias = memo(function Experiencias() {
                 transition={{ duration: 0.3 }}
               >
                 <i className="fas fa-chevron-down"></i>
+                <span className="timeline-expand-text">
+                  {expandedExperiences[idx]
+                    ? t("experienceCollapseLabel")
+                    : t("experienceExpandLabel")}
+                </span>
               </motion.div>
 
               {/* Expandable Activities */}

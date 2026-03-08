@@ -17,8 +17,8 @@ const SEOHead = ({
   const siteTitle = "Rafael Jovaneli - Senior Java Developer";
   const siteDescription =
     language === "pt"
-      ? "Desenvolvedor Full Stack especializado em React, Node.js e tecnologias web modernas. Engenheiro de software experiente com expertise em desenvolvimento frontend e backend."
-      : "Full Stack Developer specializing in React, Node.js, and modern web technologies. Experienced software engineer with expertise in frontend and backend development.";
+      ? "Senior Java Developer com experiência em sistemas corporativos, Spring Boot, cloud, mensageria e arquiteturas modernas."
+      : "Senior Java Developer with experience in enterprise systems, Spring Boot, cloud, messaging and modern architectures.";
 
   const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const pageDescription = description || siteDescription;
@@ -27,8 +27,8 @@ const SEOHead = ({
 
   const defaultKeywords =
     language === "pt"
-      ? "Rafael Jovaneli, Desenvolvedor Full Stack, React, Node.js, JavaScript, Frontend, Backend, Engenheiro de Software, Desenvolvedor Web"
-      : "Rafael Jovaneli, Full Stack Developer, React Developer, Node.js, JavaScript, Frontend, Backend, Software Engineer, Web Developer";
+      ? "Rafael Jovaneli, Senior Java Developer, Spring Boot, Microservices, AWS, Kafka, Engenheiro de Software"
+      : "Rafael Jovaneli, Senior Java Developer, Spring Boot, Microservices, AWS, Kafka, Software Engineer";
 
   const pageKeywords = keywords
     ? `${keywords}, ${defaultKeywords}`
@@ -39,7 +39,7 @@ const SEOHead = ({
     "@type": "Person",
     name: "Rafael Jovaneli",
     jobTitle:
-      language === "pt" ? "Desenvolvedor Full Stack" : "Full Stack Developer",
+      language === "pt" ? "Senior Java Developer" : "Senior Java Developer",
     description: pageDescription,
     url: pageUrl,
     image: pageImage,
@@ -49,13 +49,14 @@ const SEOHead = ({
     ],
     knowsAbout: [
       "React",
-      "Node.js",
-      "JavaScript",
-      "TypeScript",
-      "Python",
-      "Full Stack Development",
-      "Frontend Development",
+      "Java",
+      "Spring Boot",
+      "Microservices",
+      "Kafka",
+      "AWS",
       "Backend Development",
+      "Cloud Architecture",
+      "Enterprise Software",
     ],
   };
 

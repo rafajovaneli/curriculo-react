@@ -35,10 +35,10 @@ const Contact = React.memo(() => {
 
       const opened = window.open(whatsappUrl, "_blank");
       if (opened) {
-        showFeedback("Opening WhatsApp...", "success");
+        showFeedback(t("openingWhatsapp"), "success");
       } else {
         await navigator.clipboard.writeText(contactInfo.phone);
-        showFeedback("Phone number copied to clipboard!", "info");
+        showFeedback(t("phoneCopied"), "info");
       }
     } catch (error) {
       showFeedback(`Call: ${contactInfo.phone}`, "info");
@@ -56,10 +56,10 @@ const Contact = React.memo(() => {
 
       const opened = window.open(emailUrl, "_blank");
       if (opened) {
-        showFeedback("Opening email client...", "success");
+        showFeedback(t("openingEmail"), "success");
       } else {
         await navigator.clipboard.writeText(contactInfo.email);
-        showFeedback("Email address copied to clipboard!", "info");
+        showFeedback(t("emailCopied"), "info");
       }
     } catch (error) {
       showFeedback(`Email: ${contactInfo.email}`, "info");
@@ -73,16 +73,16 @@ const Contact = React.memo(() => {
     try {
       const opened = window.open(contactInfo.mapsUrl, "_blank");
       if (opened) {
-        showFeedback("Opening Google Maps...", "success");
+        showFeedback(t("openingMaps"), "success");
       } else {
-        showFeedback("Unable to open maps", "error");
+        showFeedback(t("unableOpenMaps"), "error");
       }
     } catch (error) {
-      showFeedback("Unable to open maps", "error");
+      showFeedback(t("unableOpenMaps"), "error");
     }
 
     setTimeout(() => setClickedCard(null), 300);
-  }, [contactInfo.mapsUrl, showFeedback]);
+  }, [contactInfo.mapsUrl, showFeedback, t]);
 
   return (
     <div className="contact-section">
@@ -101,60 +101,60 @@ const Contact = React.memo(() => {
 
       <div className="contact-grid" role="list">
         <div role="listitem">
-        <motion.button
-          type="button"
-          className={`contact-card ${
-            hoveredCard === "phone" ? "hovered" : ""
-          } ${clickedCard === "phone" ? "clicked" : ""}`}
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-          whileHover={{
-            scale: 1.05,
-            y: -10,
-            boxShadow: "0 20px 40px rgba(37, 211, 102, 0.3)",
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handlePhoneClick}
-          onHoverStart={() => setHoveredCard("phone")}
-          onHoverEnd={() => setHoveredCard(null)}
-          aria-label={`${t("phone")}: ${contactInfo.phone}. ${t(
-            "whatsappHint"
-          )}`}
-        >
-          <motion.div
-            className="contact-icon whatsapp-icon"
-            whileHover={{ rotate: 360, scale: 1.2 }}
-            transition={{ duration: 0.6 }}
+          <motion.button
+            type="button"
+            className={`contact-card ${
+              hoveredCard === "phone" ? "hovered" : ""
+            } ${clickedCard === "phone" ? "clicked" : ""}`}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{
+              scale: 1.05,
+              y: -10,
+              boxShadow: "0 20px 40px rgba(37, 211, 102, 0.3)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handlePhoneClick}
+            onHoverStart={() => setHoveredCard("phone")}
+            onHoverEnd={() => setHoveredCard(null)}
+            aria-label={`${t("phone")}: ${contactInfo.phone}. ${t(
+              "whatsappHint"
+            )}`}
           >
-            <i className="fab fa-whatsapp"></i>
-          </motion.div>
-          <h3>{t("phone")}</h3>
-          <p>{contactInfo.phone}</p>
-          <motion.span
-            className="contact-hint"
-            initial={{ opacity: 0.7 }}
-            whileHover={{ opacity: 1, scale: 1.05 }}
-          >
-            {t("whatsappHint")}
-          </motion.span>
-          <AnimatePresence>
-            {hoveredCard === "phone" && (
-              <motion.div
-                className="contact-hover-effect"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            )}
-          </AnimatePresence>
-        </motion.button>
+            <motion.div
+              className="contact-icon whatsapp-icon"
+              whileHover={{ rotate: 360, scale: 1.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <i className="fab fa-whatsapp"></i>
+            </motion.div>
+            <h3>{t("phone")}</h3>
+            <p>{contactInfo.phone}</p>
+            <motion.span
+              className="contact-hint"
+              initial={{ opacity: 0.7 }}
+              whileHover={{ opacity: 1, scale: 1.05 }}
+            >
+              {t("whatsappHint")}
+            </motion.span>
+            <AnimatePresence>
+              {hoveredCard === "phone" && (
+                <motion.div
+                  className="contact-hover-effect"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
         <div role="listitem">
-        <motion.button
+          <motion.button
           type="button"
           className={`contact-card ${
             hoveredCard === "email" ? "hovered" : ""
@@ -201,11 +201,11 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-        </motion.button>
+          </motion.button>
         </div>
 
         <div role="listitem">
-        <motion.button
+          <motion.button
           type="button"
           className={`contact-card ${
             hoveredCard === "location" ? "hovered" : ""
@@ -254,7 +254,7 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-        </motion.button>
+          </motion.button>
         </div>
       </div>
 

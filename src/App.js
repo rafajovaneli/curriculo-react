@@ -10,7 +10,6 @@ import SEOHead from "./components/SEOHead";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AnimatedSection from "./components/AnimatedSection";
 import ScrollProgress from "./components/ScrollProgress";
-import TypingEffect from "./components/TypingEffect";
 import Competencias from "./components/Competencias";
 import GraficoTecnologias from "./components/GraficoTecnologias";
 import Sintese from "./components/Sintese";
@@ -71,18 +70,8 @@ function AppContent() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <div className="hero-title-shell">
-                  <TypingEffect
-                    texts={["Rafael Jovaneli", "Java Developer"]}
-                    speed={100}
-                    deleteSpeed={50}
-                    pauseTime={2000}
-                    loop={true}
-                    startDelay={0}
-                    cursor="|"
-                    className="hero-typing"
-                  />
-                </div>
+                <span className="hero-eyebrow">{t("heroEyebrow")}</span>
+                <div className="hero-title-shell">Rafael Jovaneli</div>
               </motion.h1>
 
               <motion.p
@@ -94,6 +83,26 @@ function AppContent() {
                 {t("heroSubtitle")}
               </motion.p>
 
+              <motion.p
+                className="hero-location"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
+              >
+                {t("heroLocation")}
+              </motion.p>
+
+              <motion.div
+                className="hero-value-props"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.95, duration: 0.5 }}
+              >
+                <span>{t("heroValue1")}</span>
+                <span>{t("heroValue2")}</span>
+                <span>{t("heroValue3")}</span>
+              </motion.div>
+
               <motion.div
                 className="hero-buttons"
                 initial={{ y: 20, opacity: 0 }}
@@ -102,21 +111,31 @@ function AppContent() {
               >
                 <button
                   className="btn-primary hover-lift"
-                  onClick={() => scrollTo("about")}
+                  onClick={() =>
+                    window.open(
+                      `${process.env.PUBLIC_URL}/${
+                        language === "pt"
+                          ? "CV_RAFAEL_JOVANELI_PT_2025.pdf"
+                          : "CV_RAFAEL_JOVANELI_EN_2025.pdf"
+                      }`,
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
                 >
-                  {t("aboutMe")}
+                  {t("downloadResumeShort")}
                 </button>
                 <button
                   className="btn-secondary hover-lift"
                   onClick={() => scrollTo("experience")}
                 >
-                  {t("experiences")}
+                  {t("viewExperienceShort")}
                 </button>
                 <button
                   className="btn-tertiary hover-lift"
-                  onClick={() => scrollTo("contact")}
+                  onClick={() => scrollTo("professional")}
                 >
-                  {t("contactMe")}
+                  {t("professionalLinks")}
                 </button>
               </motion.div>
             </motion.div>

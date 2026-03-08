@@ -53,7 +53,7 @@ describe("App", () => {
     renderApp();
 
     expect(
-      screen.getByRole("button", { name: /about me|sobre mim/i })
+      screen.getByRole("button", { name: /download resume|baixar cv/i })
     ).toBeInTheDocument();
     expect(
       screen.getAllByRole("heading", {

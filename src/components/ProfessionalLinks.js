@@ -22,6 +22,7 @@ const ProfessionalLinks = () => {
         <div className="section-header">
           <h2 className="section-title">{t("professionalLinks")}</h2>
           <div className="section-underline"></div>
+          <p className="professional-intro">{t("professionalIntro")}</p>
         </div>
 
         <div className="professional-content">
