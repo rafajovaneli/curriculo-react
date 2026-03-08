@@ -47,21 +47,22 @@ export const createIntersectionObserver = (callback, options = {}) => {
 
 // Preload critical resources
 export const preloadCriticalResources = () => {
-  // Preload critical fonts
+  if (document.querySelector('link[data-preload="fonts-googleapis"]')) {
+    return;
+  }
+
   const fontLink = document.createElement("link");
-  fontLink.rel = "preload";
-  fontLink.href =
-    "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap";
-  fontLink.as = "style";
-  fontLink.crossOrigin = "anonymous";
+  fontLink.rel = "preconnect";
+  fontLink.href = "https://fonts.googleapis.com";
+  fontLink.setAttribute("data-preload", "fonts-googleapis");
   document.head.appendChild(fontLink);
 
-  // Preload FontAwesome
-  const faLink = document.createElement("link");
-  faLink.rel = "preload";
-  faLink.href = "/static/css/fontawesome.min.css";
-  faLink.as = "style";
-  document.head.appendChild(faLink);
+  const fontStaticLink = document.createElement("link");
+  fontStaticLink.rel = "preconnect";
+  fontStaticLink.href = "https://fonts.gstatic.com";
+  fontStaticLink.crossOrigin = "anonymous";
+  fontStaticLink.setAttribute("data-preload", "fonts-gstatic");
+  document.head.appendChild(fontStaticLink);
 };
 
 // Optimize images

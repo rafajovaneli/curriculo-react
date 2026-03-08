@@ -1,9 +1,10 @@
 import React from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import ResumeDownload from "./ResumeDownload";
 // import { motion } from "framer-motion"; // Temporarily disabled to fix blur
 
 const ProfessionalLinks = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const professionalLinks = [
     {
@@ -15,34 +16,6 @@ const ProfessionalLinks = () => {
     },
   ];
 
-  const handleDownloadResume = () => {
-    // Define the resume files hosted on GitHub
-    // Replace 'YOUR_GITHUB_USERNAME' and 'YOUR_REPO_NAME' with actual values
-    const resumeFiles = {
-      pt: {
-        url: "https://github.com/rafajovaneli/resume-files/raw/main/CV_RAFAEL_JOVANELI_PT_2025.pdf",
-        filename: "CV_RAFAEL_JOVANELI_PT_2025.pdf",
-      },
-      en: {
-        url: "https://github.com/rafajovaneli/resume-files/raw/main/CV_RAFAEL_JOVANELI_EN_2025.pdf",
-        filename: "CV_RAFAEL_JOVANELI_EN_2025.pdf",
-      },
-    };
-
-    const currentResume = resumeFiles[language];
-
-    // Create download link
-    const link = document.createElement("a");
-    link.href = currentResume.url;
-    link.download = currentResume.filename;
-    link.target = "_blank";
-
-    // Add to DOM, click, and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="professional-section section">
       <div className="container">
@@ -52,16 +25,8 @@ const ProfessionalLinks = () => {
         </div>
 
         <div className="professional-content">
-          {/* Download Resume Button */}
-          <div className="resume-download">
-            <button
-              className="download-resume-btn"
-              onClick={handleDownloadResume}
-            >
-              <i className="fas fa-download"></i>
-              <span>{t("downloadResume")}</span>
-            </button>
-          </div>
+          {/* Enhanced Resume Download */}
+          <ResumeDownload />
 
           {/* Simple LinkedIn Link */}
           <div className="simple-linkedin-container">

@@ -46,33 +46,15 @@ const Competencias = memo(function Competencias() {
       viewport={{ once: true }}
       className="fade-in-up"
     >
-      <div
-        className="section-header"
-        style={{ textAlign: "left", marginBottom: "2rem" }}
-      >
-        <h3
-          className="section-title"
-          style={{
-            fontSize: "2rem",
-            textAlign: "left",
-            marginBottom: "0.75rem",
-          }}
-        >
+      <div className="section-header section-header-left">
+        <h3 className="section-title section-title-compact">
           {t("competenciasTitle")}
         </h3>
-        <div
-          className="section-underline"
-          style={{
-            margin: "0",
-            width: "50px",
-          }}
-        ></div>
+        <div className="section-underline section-underline-compact"></div>
       </div>
 
       <div className="unified-card">
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
-        >
+        <div className="competencies-list">
           {competencias.map((comp, index) => (
             <motion.div
               key={index}
@@ -80,17 +62,9 @@ const Competencias = memo(function Competencias() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "1rem",
-                padding: "1rem 0",
-                borderBottom:
-                  index < competencias.length - 1
-                    ? "1px solid rgba(0, 0, 0, 0.08)"
-                    : "none",
-                transition: "all 0.3s ease",
-              }}
+              className={`competency-item ${
+                index === competencias.length - 1 ? "is-last" : ""
+              }`}
               whileHover={{
                 x: 8,
                 transition: { duration: 0.2 },
@@ -98,40 +72,17 @@ const Competencias = memo(function Competencias() {
             >
               {/* Icon Container */}
               <div
+                className="competency-icon"
                 style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "10px",
-                  background: `${comp.color}15`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                  marginTop: "2px",
+                  "--competency-accent": comp.color,
                 }}
               >
-                <i
-                  className={comp.icon}
-                  style={{
-                    color: comp.color,
-                    fontSize: "1.1rem",
-                  }}
-                ></i>
+                <i className={comp.icon}></i>
               </div>
 
               {/* Text Content */}
-              <div style={{ flex: 1 }}>
-                <p
-                  style={{
-                    margin: 0,
-                    color: "var(--text-color)",
-                    fontSize: "0.95rem",
-                    lineHeight: "1.6",
-                    fontWeight: "400",
-                  }}
-                >
-                  {comp.text}
-                </p>
+              <div className="competency-content">
+                <p className="competency-text">{comp.text}</p>
               </div>
             </motion.div>
           ))}

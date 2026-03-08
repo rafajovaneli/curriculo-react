@@ -1,168 +1,86 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export const useScrollAnimation = (options = {}) => {
-  const {
-    threshold = 0.1,
-    rootMargin = "0px",
-    triggerOnce = true,
-    delay = 0,
-    duration = 0.6,
-    easing = "ease-out",
-  } = options;
-
+export const useScrollAnimation = (threshold = 0.1, rootMargin = "0px") => {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef(null);
-  const observerRef = useRef(null);
 
-  const observe = useCallback(() => {
-    if (!elementRef.current) return;
+  useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      setHasAnimated(true);
+      return undefined;
+    }
 
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
-        const shouldTrigger =
-          entry.isIntersecting && (!triggerOnce || !hasTriggered);
-
-        if (shouldTrigger) {
-          setTimeout(() => {
-            setIsVisible(true);
-            if (triggerOnce) {
-              setHasTriggered(true);
-              observerRef.current?.disconnect();
-            }
-          }, delay);
-        } else if (!triggerOnce) {
-          setIsVisible(false);
+        if (entry.isIntersecting && !hasAnimated) {
+          setIsVisible(true);
+          setHasAnimated(true);
         }
       },
-      { threshold, rootMargin }
+      {
+        threshold,
+        rootMargin,
+      }
     );
 
-    observerRef.current.observe(elementRef.current);
-  }, [threshold, rootMargin, triggerOnce, hasTriggered, delay]);
-
-  useEffect(() => {
-    observe();
-    return () => observerRef.current?.disconnect();
-  }, [observe]);
-
-  const animationStyle = {
-    transition: `all ${duration}s ${easing}`,
-    transform: isVisible
-      ? "translateY(0) scale(1)"
-      : "translateY(50px) scale(0.95)",
-    opacity: isVisible ? 1 : 0,
-  };
-
-  return { elementRef, isVisible, animationStyle };
-};
-
-// Advanced scroll animations with different effects
-export const useScrollAnimations = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState("down");
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const documentHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-
-      setScrollY(currentScrollY);
-      setScrollProgress(currentScrollY / documentHeight);
-      setScrollDirection(currentScrollY > lastScrollY.current ? "down" : "up");
-      lastScrollY.current = currentScrollY;
-    };
-
-    const throttledScroll = throttle(handleScroll, 16); // ~60fps
-    window.addEventListener("scroll", throttledScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", throttledScroll);
-  }, []);
-
-  return { scrollY, scrollDirection, scrollProgress };
-};
-
-// Parallax scroll effect
-export const useParallax = (speed = 0.5) => {
-  const [offset, setOffset] = useState(0);
-  const elementRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!elementRef.current) return;
-
-      const rect = elementRef.current.getBoundingClientRect();
-      const scrolled = window.scrollY;
-      const rate = scrolled * speed;
-
-      setOffset(rate);
-    };
-
-    const throttledScroll = throttle(handleScroll, 16);
-    window.addEventListener("scroll", throttledScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", throttledScroll);
-  }, [speed]);
-
-  const parallaxStyle = {
-    transform: `translateY(${offset}px)`,
-  };
-
-  return { elementRef, parallaxStyle };
-};
-
-// Utility function for throttling
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function () {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+    const currentElement = elementRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
     }
-  };
+
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
+    };
+  }, [threshold, rootMargin, hasAnimated]);
+
+  return { elementRef, isVisible, hasAnimated };
 };
 
-// Stagger animation for multiple elements
-export const useStaggerAnimation = (itemCount, delay = 100) => {
+export const useStaggeredAnimation = (itemCount, delay = 100) => {
   const [visibleItems, setVisibleItems] = useState(new Set());
   const containerRef = useRef(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      setVisibleItems(new Set(Array.from({ length: itemCount }, (_, index) => index)));
+      return undefined;
+    }
+
+    const timeouts = [];
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Stagger the animation of child elements
+          // Stagger the animation of items
           for (let i = 0; i < itemCount; i++) {
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
               setVisibleItems((prev) => new Set([...prev, i]));
             }, i * delay);
+            timeouts.push(timeoutId);
           }
-          observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.1,
+        rootMargin: "0px",
+      }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    const currentContainer = containerRef.current;
+    if (currentContainer) {
+      observer.observe(currentContainer);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+      if (currentContainer) {
+        observer.unobserve(currentContainer);
+      }
+    };
   }, [itemCount, delay]);
 
-  const getItemStyle = (index) => ({
-    opacity: visibleItems.has(index) ? 1 : 0,
-    transform: visibleItems.has(index) ? "translateY(0)" : "translateY(30px)",
-    transition: "all 0.6s ease-out",
-  });
-
-  return { containerRef, getItemStyle, visibleItems };
+  return { containerRef, visibleItems };
 };
-
-export default useScrollAnimation;

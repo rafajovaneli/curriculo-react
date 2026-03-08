@@ -100,7 +100,9 @@ const Contact = React.memo(() => {
       </div>
 
       <div className="contact-grid" role="list">
-        <motion.div
+        <div role="listitem">
+        <motion.button
+          type="button"
           className={`contact-card ${
             hoveredCard === "phone" ? "hovered" : ""
           } ${clickedCard === "phone" ? "clicked" : ""}`}
@@ -117,14 +119,6 @@ const Contact = React.memo(() => {
           onClick={handlePhoneClick}
           onHoverStart={() => setHoveredCard("phone")}
           onHoverEnd={() => setHoveredCard(null)}
-          role="listitem"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handlePhoneClick();
-            }
-          }}
           aria-label={`${t("phone")}: ${contactInfo.phone}. ${t(
             "whatsappHint"
           )}`}
@@ -156,9 +150,12 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-        </motion.div>
+        </motion.button>
+        </div>
 
-        <motion.div
+        <div role="listitem">
+        <motion.button
+          type="button"
           className={`contact-card ${
             hoveredCard === "email" ? "hovered" : ""
           } ${clickedCard === "email" ? "clicked" : ""}`}
@@ -175,14 +172,6 @@ const Contact = React.memo(() => {
           onClick={handleEmailClick}
           onHoverStart={() => setHoveredCard("email")}
           onHoverEnd={() => setHoveredCard(null)}
-          role="listitem"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handleEmailClick();
-            }
-          }}
           aria-label={`${t("email")}: ${contactInfo.email}. ${t("emailHint")}`}
         >
           <motion.div
@@ -212,9 +201,12 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-        </motion.div>
+        </motion.button>
+        </div>
 
-        <motion.div
+        <div role="listitem">
+        <motion.button
+          type="button"
           className={`contact-card ${
             hoveredCard === "location" ? "hovered" : ""
           } ${clickedCard === "location" ? "clicked" : ""}`}
@@ -231,14 +223,6 @@ const Contact = React.memo(() => {
           onClick={handleLocationClick}
           onHoverStart={() => setHoveredCard("location")}
           onHoverEnd={() => setHoveredCard(null)}
-          role="listitem"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              handleLocationClick();
-            }
-          }}
           aria-label={`${t("location")}: ${contactInfo.location}. ${t(
             "viewOnMaps"
           )}`}
@@ -270,7 +254,8 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-        </motion.div>
+        </motion.button>
+        </div>
       </div>
 
       {/* Feedback Notification */}
@@ -278,6 +263,9 @@ const Contact = React.memo(() => {
         {feedback.show && (
           <motion.div
             className={`contact-feedback ${feedback.type}`}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
             initial={{ opacity: 0, y: 50, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -50, scale: 0.8 }}

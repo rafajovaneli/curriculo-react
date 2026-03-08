@@ -11,9 +11,10 @@ const SEOHead = ({
   type = "website",
   section = "home",
 }) => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
+  const siteUrl = "https://rafajovaneli.github.io/curriculo-react";
 
-  const siteTitle = "Rafael Jovaneli - Full Stack Developer";
+  const siteTitle = "Rafael Jovaneli - Senior Java Developer";
   const siteDescription =
     language === "pt"
       ? "Desenvolvedor Full Stack especializado em React, Node.js e tecnologias web modernas. Engenheiro de software experiente com expertise em desenvolvimento frontend e backend."
@@ -21,7 +22,7 @@ const SEOHead = ({
 
   const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const pageDescription = description || siteDescription;
-  const pageUrl = url || "https://rafajovaneli.github.io/curriculo-react";
+  const pageUrl = url || siteUrl;
   const pageImage = image || `${pageUrl}/logo512.png`;
 
   const defaultKeywords =
@@ -103,13 +104,6 @@ const SEOHead = ({
         {JSON.stringify(structuredData)}
       </script>
 
-      {/* Preload Critical Resources */}
-      <link
-        rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-        as="style"
-      />
-      <link rel="preload" href="/static/css/main.css" as="style" />
     </Helmet>
   );
 };

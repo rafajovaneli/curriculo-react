@@ -1,0 +1,296 @@
+.resume-download-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.resume-download-main {
+  display: flex;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.download-resume-btn.primary {
+  flex: 1;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 0 0 12px;
+}
+
+.download-resume-btn.primary:hover {
+  background: linear-gradient(135deg, #5855eb 0%, #7c3aed 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
+}
+
+.download-resume-btn.primary.downloading {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  cursor: not-allowed;
+}
+
+.download-resume-btn.primary.success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.download-resume-btn.primary.error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.download-options-toggle {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0 12px 12px 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-options-toggle:hover {
+  background: linear-gradient(135deg, #5855eb 0%, #7c3aed 100%);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.download-options {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.options-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.option-group h4 {
+  margin: 0 0 1rem 0;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.language-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #f3f4f6;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.language-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.language-btn.active {
+  background: #ddd6fe;
+  border-color: #8b5cf6;
+  color: #7c3aed;
+}
+
+.alternative-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.alt-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.alt-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.alt-btn.view-online:hover {
+  background: #dbeafe;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.alt-btn.email-request:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+/* Flag icons */
+.flag-br::before {
+  content: "🇧🇷";
+}
+
+.flag-us::before {
+  content: "🇺🇸";
+}
+
+/* Dark theme */
+.dark-theme .download-resume-btn.primary {
+  background: linear-gradient(135deg, #00ff41 0%, #0ff 100%) !important;
+  color: #000 !important;
+}
+
+.dark-theme .download-resume-btn.primary:hover {
+  background: linear-gradient(135deg, #00cc33 0%, #00cccc 100%) !important;
+  box-shadow: 0 6px 25px rgba(0, 255, 65, 0.4);
+}
+
+.dark-theme .download-options-toggle {
+  background: linear-gradient(135deg, #00ff41 0%, #0ff 100%) !important;
+  color: #000 !important;
+}
+
+.dark-theme .download-options-toggle:hover {
+  background: linear-gradient(135deg, #00cc33 0%, #00cccc 100%) !important;
+}
+
+.dark-theme .download-options {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.dark-theme .option-group h4 {
+  color: #d1d5db;
+}
+
+.dark-theme .language-btn {
+  background: #374151;
+  color: #d1d5db;
+}
+
+.dark-theme .language-btn:hover {
+  background: #4b5563;
+}
+
+.dark-theme .language-btn.active {
+  background: #065f46;
+  border-color: #00ff41;
+  color: #00ff41;
+}
+
+.dark-theme .alt-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.dark-theme .alt-btn:hover {
+  background: #4b5563;
+  border-color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resume-download-main {
+    flex-direction: column;
+  }
+
+  .download-resume-btn.primary {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .download-options-toggle {
+    border-radius: 0 0 12px 12px;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .language-buttons,
+  .alternative-buttons {
+    flex-direction: column;
+  }
+
+  .language-btn,
+  .alt-btn {
+    justify-content: center;
+  }
+}
+
+/* Remove any unwanted overlays or backgrounds */
+.resume-download-container * {
+  position: relative;
+  z-index: auto;
+}
+
+.resume-download-container {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure no purple/violet backgrounds in dark theme */
+.dark-theme .resume-download-container,
+.dark-theme .resume-download-main,
+.dark-theme .download-options {
+  background: transparent !important;
+}
+
+.dark-theme .download-options {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+/* Override any conflicting styles */
+.professional-content {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+.professional-section {
+  background: transparent !important;
+  position: relative;
+}
+
+/* Remove any modal or overlay effects */
+.resume-download-container::before,
+.resume-download-container::after,
+.professional-content::before,
+.professional-content::after {
+  display: none !important;
+}

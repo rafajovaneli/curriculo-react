@@ -127,36 +127,14 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
       viewport={{ once: true }}
       className="fade-in-up"
     >
-      <div
-        className="section-header"
-        style={{ textAlign: "left", marginBottom: "2rem" }}
-      >
-        <h3
-          className="section-title"
-          style={{
-            fontSize: "2rem",
-            textAlign: "left",
-            marginBottom: "0.75rem",
-          }}
-        >
+      <div className="section-header section-header-left">
+        <h3 className="section-title section-title-compact">
           {t("skillsTitle")}
         </h3>
-        <div
-          className="section-underline"
-          style={{
-            margin: "0",
-            width: "50px",
-          }}
-        ></div>
+        <div className="section-underline section-underline-compact"></div>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-          gap: "2rem",
-        }}
-      >
+      <div className="skills-categories-grid">
         {skillCategories.map((category, categoryIndex) => (
           <motion.div
             key={categoryIndex}
@@ -167,52 +145,28 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
             className="unified-card"
           >
             {/* Category Header - Clickable */}
-            <div
-              style={{
-                marginBottom: "1.5rem",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-              onClick={() => toggleCategory(categoryIndex)}
-            >
-              <div>
-                <h4
-                  style={{
-                    color: "var(--text-color)",
-                    fontSize: "1.3rem",
-                    fontWeight: "700",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {category.title}
-                </h4>
-                <div
-                  style={{
-                    width: "40px",
-                    height: "3px",
-                    background:
-                      "linear-gradient(135deg, #6366f1 0%, #06b6d4 100%)",
-                    borderRadius: "2px",
-                  }}
-                ></div>
-              </div>
-
-              {/* Expand/Collapse Icon */}
-              <motion.div
-                animate={{
-                  rotate: expandedCategories[categoryIndex] ? 180 : 0,
-                }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  color: "var(--text-color)",
-                  fontSize: "1.2rem",
-                }}
+              <button
+                type="button"
+                className="skill-category-toggle"
+                onClick={() => toggleCategory(categoryIndex)}
+                aria-expanded={Boolean(expandedCategories[categoryIndex])}
               >
-                <i className="fas fa-chevron-down"></i>
-              </motion.div>
-            </div>
+                <div>
+                  <h4 className="skill-category-title">{category.title}</h4>
+                  <div className="skill-category-underline"></div>
+                </div>
+
+                {/* Expand/Collapse Icon */}
+                <motion.div
+                  animate={{
+                    rotate: expandedCategories[categoryIndex] ? 180 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="skill-category-chevron"
+                >
+                  <i className="fas fa-chevron-down"></i>
+                </motion.div>
+              </button>
 
             {/* Skills List */}
             <AnimatePresence>
@@ -222,12 +176,7 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1rem",
-                    overflow: "hidden",
-                  }}
+                  className="skill-list"
                 >
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
@@ -239,65 +188,26 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                         duration: 0.4,
                       }}
                       viewport={{ once: true }}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1rem",
-                      }}
+                      className="skill-row"
                     >
                       {/* Skill Icon */}
                       <div
+                        className="skill-icon-shell"
                         style={{
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "8px",
-                          background: `${skill.color}15`,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
+                          "--skill-accent": skill.color,
                         }}
                       >
-                        <i
-                          className={skill.icon}
-                          style={{
-                            color: skill.color,
-                            fontSize: "1.2rem",
-                          }}
-                        ></i>
+                        <i className={skill.icon}></i>
                       </div>
 
                       {/* Skill Info */}
-                      <div style={{ flex: 1 }}>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            marginBottom: "0.5rem",
-                          }}
-                        >
-                          <span
-                            style={{
-                              color: "var(--text-color)",
-                              fontWeight: "600",
-                              fontSize: "0.95rem",
-                            }}
-                          >
-                            {skill.name}
-                          </span>
+                      <div className="skill-content">
+                        <div className="skill-meta">
+                          <span className="skill-name">{skill.name}</span>
                         </div>
 
                         {/* Progress Bar */}
-                        <div
-                          style={{
-                            width: "100%",
-                            height: "6px",
-                            background: "rgba(0, 0, 0, 0.1)",
-                            borderRadius: "3px",
-                            overflow: "hidden",
-                          }}
-                        >
+                        <div className="skill-progress-track">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.level}%` }}
@@ -308,10 +218,9 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                               ease: "easeOut",
                             }}
                             viewport={{ once: true }}
+                            className="skill-progress-bar"
                             style={{
-                              height: "100%",
-                              background: `linear-gradient(90deg, ${skill.color} 0%, ${skill.color}80 100%)`,
-                              borderRadius: "3px",
+                              "--skill-accent": skill.color,
                             }}
                           />
                         </div>

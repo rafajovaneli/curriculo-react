@@ -27,30 +27,30 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "categories": ["portfolio", "developer", "technology"],
-  "lang": "en",
+  "lang": "pt-BR",
   "dir": "ltr",
-  "scope": "/",
+  "scope": "/curriculo-react/",
   "prefer_related_applications": false,
   "shortcuts": [
     {
       "name": "About",
       "short_name": "About",
       "description": "Learn about Rafael's background and experience",
-      "url": "/#about",
+      "url": "./#about",
       "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
     },
     {
       "name": "Skills",
       "short_name": "Skills",
       "description": "View technical skills and expertise",
-      "url": "/#skills",
+      "url": "./#skills",
       "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
     },
     {
       "name": "Contact",
       "short_name": "Contact",
       "description": "Get in touch with Rafael",
-      "url": "/#contact",
+      "url": "./#contact",
       "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
     }
   ]

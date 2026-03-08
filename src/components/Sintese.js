@@ -42,14 +42,7 @@ function Sintese() {
       </div>
 
       {/* Achievement Badges */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-          gap: "1.5rem",
-          marginBottom: "3rem",
-        }}
-      >
+      <div className="about-achievements-grid">
         {achievements.map((achievement, index) => (
           <motion.div
             key={index}
@@ -57,192 +50,53 @@ function Sintese() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
             viewport={{ once: true }}
-            className="unified-card"
-            style={{
-              padding: "1.5rem",
-              textAlign: "center",
-            }}
+            className="unified-card achievement-card"
           >
             <i
-              className={achievement.icon}
-              style={{
-                fontSize: "2rem",
-                color: achievement.color,
-                marginBottom: "0.75rem",
-                display: "block",
-              }}
+              className={`${achievement.icon} achievement-icon`}
+              style={{ "--achievement-accent": achievement.color }}
             ></i>
-            <span
-              style={{
-                fontWeight: "600",
-                color: "var(--text-color)",
-                fontSize: "0.95rem",
-              }}
-            >
-              {achievement.text}
-            </span>
+            <span className="achievement-text">{achievement.text}</span>
           </motion.div>
         ))}
       </div>
 
-      <div className="unified-card" style={{ padding: "2.5rem" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "2rem",
-          }}
-        >
-          <div
-            style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #6366f1 0%, #06b6d4 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: "1rem",
-            }}
-          >
-            <i
-              className="fas fa-code"
-              style={{
-                color: "white",
-                fontSize: "1.5rem",
-              }}
-            ></i>
+      <div className="unified-card about-summary-card">
+        <div className="about-intro">
+          <div className="about-avatar">
+            <i className="fas fa-code"></i>
           </div>
           <div>
-            <h3
-              style={{
-                margin: 0,
-                color: "var(--primary-color)",
-                fontSize: "1.4rem",
-                fontWeight: "700",
-              }}
-            >
-              {t("roleTitle")}
-            </h3>
-            <p
-              style={{
-                margin: 0,
-                color: "var(--text-muted)",
-                fontSize: "1rem",
-              }}
-            >
-              {t("roleSubtitle")}
-            </p>
+            <h3 className="about-role-title">{t("roleTitle")}</h3>
+            <p className="about-role-subtitle">{t("roleSubtitle")}</p>
           </div>
         </div>
 
-        <p
-          style={{
-            fontSize: "1.1rem",
-            fontWeight: "400",
-            color: "var(--text-color)",
-            marginBottom: "2rem",
-            lineHeight: "1.7",
-          }}
-        >
-          {t("aboutDescription")}
-        </p>
+        <p className="about-description">{t("aboutDescription")}</p>
 
-        <div style={{ display: "grid", gap: "1.5rem" }}>
-          <div
-            style={{
-              padding: "1.5rem",
-              background: "rgba(99, 102, 241, 0.08)",
-              borderRadius: "12px",
-              borderLeft: "4px solid var(--primary-color)",
-            }}
-          >
-            <h4
-              style={{
-                color: "var(--primary-color)",
-                marginBottom: "0.75rem",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-              }}
-            >
-              <i
-                className="fas fa-briefcase"
-                style={{ marginRight: "0.75rem" }}
-              ></i>
+        <div className="about-detail-grid">
+          <div className="about-detail-card primary">
+            <h4 className="about-detail-title primary">
+              <i className="fas fa-briefcase about-detail-icon"></i>
               {t("corporateExperience")}
             </h4>
-            <p
-              style={{
-                margin: 0,
-                lineHeight: "1.6",
-                color: "var(--text-color)",
-              }}
-            >
-              {t("corporateDescription")}
-            </p>
+            <p className="about-detail-text">{t("corporateDescription")}</p>
           </div>
 
-          <div
-            style={{
-              padding: "1.5rem",
-              background: "rgba(6, 182, 212, 0.08)",
-              borderRadius: "12px",
-              borderLeft: "4px solid var(--accent-color)",
-            }}
-          >
-            <h4
-              style={{
-                color: "var(--accent-color)",
-                marginBottom: "0.75rem",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-              }}
-            >
-              <i className="fas fa-cogs" style={{ marginRight: "0.75rem" }}></i>
+          <div className="about-detail-card accent">
+            <h4 className="about-detail-title accent">
+              <i className="fas fa-cogs about-detail-icon"></i>
               {t("techStack")}
             </h4>
-            <p
-              style={{
-                margin: 0,
-                lineHeight: "1.6",
-                color: "var(--text-color)",
-              }}
-            >
-              {t("techDescription")}
-            </p>
+            <p className="about-detail-text">{t("techDescription")}</p>
           </div>
 
-          <div
-            style={{
-              padding: "1.5rem",
-              background: "rgba(16, 185, 129, 0.08)",
-              borderRadius: "12px",
-              borderLeft: "4px solid var(--accent-secondary)",
-            }}
-          >
-            <h4
-              style={{
-                color: "var(--accent-secondary)",
-                marginBottom: "0.75rem",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-              }}
-            >
-              <i
-                className="fas fa-users-cog"
-                style={{ marginRight: "0.75rem" }}
-              ></i>
+          <div className="about-detail-card success">
+            <h4 className="about-detail-title success">
+              <i className="fas fa-users-cog about-detail-icon"></i>
               {t("leadershipMethodologies")}
             </h4>
-            <p
-              style={{
-                margin: 0,
-                lineHeight: "1.6",
-                color: "var(--text-color)",
-              }}
-            >
-              {t("leadershipDescription")}
-            </p>
+            <p className="about-detail-text">{t("leadershipDescription")}</p>
           </div>
         </div>
       </div>

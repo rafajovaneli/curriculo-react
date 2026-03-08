@@ -4,8 +4,12 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { motion } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./hooks/useTheme";
+import { useSmoothScroll } from "./hooks/useSmoothScroll";
+import { useScrollVisibility } from "./hooks/useScrollVisibility";
 import SEOHead from "./components/SEOHead";
 import ErrorBoundary from "./components/ErrorBoundary";
+import AnimatedSection from "./components/AnimatedSection";
+import ScrollProgress from "./components/ScrollProgress";
 import TypingEffect from "./components/TypingEffect";
 import Competencias from "./components/Competencias";
 import GraficoTecnologias from "./components/GraficoTecnologias";
@@ -15,35 +19,18 @@ import ProfessionalLinks from "./components/ProfessionalLinks";
 import Contact from "./components/Contact";
 import "./App.css";
 import "./styles/optimized.css";
-import {
-  preloadCriticalResources,
-  getOptimizedAnimationConfig,
-} from "./utils/performance";
+import { preloadCriticalResources } from "./utils/performance";
 
 function AppContent() {
-  const { darkMode, toggleTheme } = useTheme();
+  const { darkMode, toggleTheme, getThemeIcon, getThemeLabel } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
+  const { scrollTo, scrollToTop } = useSmoothScroll();
+  const showBackToTop = useScrollVisibility(400);
 
   // Preload critical resources on mount
   useEffect(() => {
     preloadCriticalResources();
   }, []);
-
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-
-      window.history.pushState(null, null, `#${id}`);
-    }
-  };
 
   return (
     <>
@@ -53,22 +40,23 @@ function AppContent() {
         section="home"
       />
 
+      <ScrollProgress />
+
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
 
-      <div
-        className={darkMode ? "dark-theme" : "light-theme"}
-        id="main-content"
-        role="main"
-      >
+        <div
+          className={darkMode ? "dark-theme" : "light-theme"}
+          id="main-content"
+          role="main"
+        >
         {/* Hero Section */}
         <motion.section
-          className="hero-section"
+          className="hero-section hero-section-layered"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          style={{ position: "relative", zIndex: 10 }}
         >
           <div className="hero-content">
             <motion.div
@@ -83,21 +71,7 @@ function AppContent() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <div
-                  style={{
-                    minHeight: "80px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#00ff41",
-                    fontSize: "4rem",
-                    fontWeight: "800",
-                    backgroundColor: "rgba(0, 0, 0, 0.8)",
-                    padding: "20px",
-                    borderRadius: "10px",
-                    border: "2px solid #00ff41",
-                  }}
-                >
+                <div className="hero-title-shell">
                   <TypingEffect
                     texts={["Rafael Jovaneli", "Java Developer"]}
                     speed={100}
@@ -160,21 +134,14 @@ function AppContent() {
           transition={{ delay: 0.1, duration: 0.5 }}
         >
           <div className="nav-container">
-            <div
+            <button
               className="nav-brand"
-              role="button"
-              tabIndex={0}
+              type="button"
               aria-label="Rafael Henrique Jovaneli - Go to top"
-              onClick={() => scrollTo("main-content")}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  scrollTo("main-content");
-                }
-              }}
+              onClick={() => scrollToTop()}
             >
               RHJ
-            </div>
+            </button>
 
             <div
               className="nav-center"
@@ -237,15 +204,11 @@ function AppContent() {
               <button
                 className="theme-toggle"
                 onClick={toggleTheme}
-                title={
-                  darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
-                }
-                aria-label={
-                  darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
-                }
+                title={getThemeLabel()}
+                aria-label={getThemeLabel()}
               >
                 <span className="theme-icon" aria-hidden="true">
-                  {darkMode ? "☀️" : "🌙"}
+                  {getThemeIcon()}
                 </span>
               </button>
             </div>
@@ -254,14 +217,21 @@ function AppContent() {
 
         {/* About Section */}
         <section id="about" className="section" aria-labelledby="about-heading">
+          <h2 id="about-heading" className="visually-hidden">
+            {t("aboutTitle")}
+          </h2>
           <div className="container">
-            <ErrorBoundary
-              fallback={
-                <div className="error-message">Error loading About section</div>
-              }
-            >
-              <Sintese />
-            </ErrorBoundary>
+            <AnimatedSection animation="fadeInUp" delay={0.2}>
+              <ErrorBoundary
+                fallback={
+                  <div className="error-message">
+                    Error loading About section
+                  </div>
+                }
+              >
+                <Sintese />
+              </ErrorBoundary>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -271,9 +241,16 @@ function AppContent() {
           className="section alt-bg"
           aria-labelledby="skills-heading"
         >
+          <h2 id="skills-heading" className="visually-hidden">
+            {t("skillsTitle")}
+          </h2>
           <div className="container">
             <div className="skills-grid">
-              <div className="skills-left">
+              <AnimatedSection
+                animation="fadeInLeft"
+                delay={0.1}
+                className="skills-left"
+              >
                 <ErrorBoundary
                   fallback={
                     <div className="error-message">Error loading Skills</div>
@@ -281,8 +258,12 @@ function AppContent() {
                 >
                   <Competencias />
                 </ErrorBoundary>
-              </div>
-              <div className="skills-right">
+              </AnimatedSection>
+              <AnimatedSection
+                animation="fadeInRight"
+                delay={0.3}
+                className="skills-right"
+              >
                 <ErrorBoundary
                   fallback={
                     <div className="error-message">
@@ -292,7 +273,7 @@ function AppContent() {
                 >
                   <GraficoTecnologias />
                 </ErrorBoundary>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
         </section>
@@ -303,14 +284,19 @@ function AppContent() {
           className="section"
           aria-labelledby="experience-heading"
         >
+          <h2 id="experience-heading" className="visually-hidden">
+            {t("experienceTitle")}
+          </h2>
           <div className="container">
-            <ErrorBoundary
-              fallback={
-                <div className="error-message">Error loading Experience</div>
-              }
-            >
-              <Experiencias />
-            </ErrorBoundary>
+            <AnimatedSection animation="slideInUp" delay={0.2}>
+              <ErrorBoundary
+                fallback={
+                  <div className="error-message">Error loading Experience</div>
+                }
+              >
+                <Experiencias />
+              </ErrorBoundary>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -320,16 +306,21 @@ function AppContent() {
           className="section alt-bg"
           aria-labelledby="professional-heading"
         >
+          <h2 id="professional-heading" className="visually-hidden">
+            {t("professionalLinks")}
+          </h2>
           <div className="container">
-            <ErrorBoundary
-              fallback={
-                <div className="error-message">
-                  Error loading Professional Links
-                </div>
-              }
-            >
-              <ProfessionalLinks />
-            </ErrorBoundary>
+            <AnimatedSection animation="scaleIn" delay={0.1}>
+              <ErrorBoundary
+                fallback={
+                  <div className="error-message">
+                    Error loading Professional Links
+                  </div>
+                }
+              >
+                <ProfessionalLinks />
+              </ErrorBoundary>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -339,14 +330,19 @@ function AppContent() {
           className="section"
           aria-labelledby="contact-heading"
         >
+          <h2 id="contact-heading" className="visually-hidden">
+            {t("contactMe")}
+          </h2>
           <div className="container">
-            <ErrorBoundary
-              fallback={
-                <div className="error-message">Error loading Contact</div>
-              }
-            >
-              <Contact />
-            </ErrorBoundary>
+            <AnimatedSection animation="fadeInUp" delay={0.2}>
+              <ErrorBoundary
+                fallback={
+                  <div className="error-message">Error loading Contact</div>
+                }
+              >
+                <Contact />
+              </ErrorBoundary>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -359,6 +355,24 @@ function AppContent() {
         >
           <i className="fas fa-envelope"></i>
         </button>
+
+        {/* Back to Top Button */}
+        {showBackToTop && (
+          <motion.button
+            className="back-to-top-btn"
+            onClick={scrollToTop}
+            title="Voltar ao Topo"
+            aria-label="Voltar ao Topo"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <i className="fas fa-arrow-up"></i>
+          </motion.button>
+        )}
       </div>
     </>
   );

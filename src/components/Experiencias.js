@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo } from "react";
+import React, { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -227,7 +227,7 @@ const Experiencias = memo(function Experiencias() {
     ],
   };
 
-  const experiencias = useMemo(() => experienciasData[language], [language]);
+  const experiencias = experienciasData[language];
 
   return (
     <motion.div
@@ -260,21 +260,26 @@ const Experiencias = memo(function Experiencias() {
             viewport={{ once: true }}
           >
             {/* Timeline Node */}
-            <motion.div
+            <motion.button
+              type="button"
               className="timeline-node"
               whileHover={{ scale: 1.2 }}
               onClick={() => toggleExperience(idx)}
+              aria-label={`${exp.empresa} - ${exp.periodo}`}
+              aria-expanded={Boolean(expandedExperiences[idx])}
             >
               <div className="timeline-node-inner">
                 <i className="fas fa-briefcase"></i>
               </div>
-            </motion.div>
+            </motion.button>
 
             {/* Timeline Content */}
-            <motion.div
+            <motion.button
+              type="button"
               className="timeline-content"
               onClick={() => toggleExperience(idx)}
               whileHover={{ scale: 1.02 }}
+              aria-expanded={Boolean(expandedExperiences[idx])}
             >
               <div className="timeline-header">
                 <h3 className="timeline-company">{exp.empresa}</h3>
@@ -319,7 +324,7 @@ const Experiencias = memo(function Experiencias() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </motion.button>
           </motion.div>
         ))}
       </div>

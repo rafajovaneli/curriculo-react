@@ -88,6 +88,13 @@ export const translations = {
 
     // Professional Links & Resume
     downloadResume: "Baixar Currículo",
+    downloading: "Baixando...",
+    downloadSuccess: "Download Concluído!",
+    downloadError: "Erro no Download",
+    chooseLanguage: "Escolher Idioma",
+    alternatives: "Alternativas",
+    viewOnline: "Visualizar Online",
+    requestByEmail: "Solicitar por Email",
     professionalLinks: "Links Profissionais",
     linkedinProfile: "Perfil LinkedIn",
     githubProfile: "Perfil GitHub",
@@ -170,6 +177,13 @@ export const translations = {
 
     // Professional Links & Resume
     downloadResume: "Download Resume",
+    downloading: "Downloading...",
+    downloadSuccess: "Download Complete!",
+    downloadError: "Download Error",
+    chooseLanguage: "Choose Language",
+    alternatives: "Alternatives",
+    viewOnline: "View Online",
+    requestByEmail: "Request by Email",
     professionalLinks: "Professional Links",
     linkedinProfile: "LinkedIn Profile",
     githubProfile: "GitHub Profile",

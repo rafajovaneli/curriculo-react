@@ -1,0 +1,263 @@
+/* Loading Screen Styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a1a1a 25%,
+    #2a2a2a 50%,
+    #1a1a1a 75%,
+    #0a0a0a 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 0.5s ease-out 2.5s forwards;
+}
+
+.loading-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.loading-logo {
+  font-family: "Courier New", monospace;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #00ff41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-prompt {
+  opacity: 0.8;
+  animation: blink 1.5s infinite;
+}
+
+.loading-text {
+  background: linear-gradient(135deg, #00ff41 0%, #0ff 50%, #ff0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.loading-subtitle {
+  font-family: "Courier New", monospace;
+  color: #888;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  animation: typewriter 2s steps(20) infinite;
+}
+
+.loading-bar-container {
+  width: 300px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff41 0%, #0ff 50%, #ff0080 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.loading-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+.loading-percentage {
+  font-family: "Courier New", monospace;
+  color: #00ff41;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.loading-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.loading-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00ff41;
+  border-radius: 50%;
+  animation: float 3s infinite linear;
+}
+
+.loading-particle:nth-child(odd) {
+  background: #0ff;
+  animation-duration: 4s;
+}
+
+.loading-particle:nth-child(3n) {
+  background: #ff0080;
+  animation-duration: 5s;
+}
+
+.loading-particle:nth-child(2n) {
+  width: 3px;
+  height: 3px;
+}
+
+.loading-particle:nth-child(5n) {
+  width: 1px;
+  height: 1px;
+}
+
+/* Animations */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes glow {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes typewriter {
+  0%,
+  90% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .loading-logo {
+    font-size: 2rem;
+  }
+
+  .loading-bar-container {
+    width: 250px;
+  }
+
+  .loading-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Light theme support */
+.light-theme .loading-screen {
+  background: linear-gradient(
+    135deg,
+    #f8fafc 0%,
+    #e2e8f0 25%,
+    #cbd5e1 50%,
+    #94a3b8 75%,
+    #64748b 100%
+  );
+}
+
+.light-theme .loading-text {
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light-theme .loading-prompt,
+.light-theme .loading-percentage {
+  color: #6366f1;
+}
+
+.light-theme .loading-subtitle {
+  color: #64748b;
+}
+
+.light-theme .loading-bar {
+  background: linear-gradient(90deg, #6366f1 0%, #06b6d4 50%, #8b5cf6 100%);
+}
+
+.light-theme .loading-particle {
+  background: #6366f1;
+}
+
+.light-theme .loading-particle:nth-child(odd) {
+  background: #06b6d4;
+}
+
+.light-theme .loading-particle:nth-child(3n) {
+  background: #8b5cf6;
+}
