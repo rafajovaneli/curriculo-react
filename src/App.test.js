@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
+import { detectInitialLanguage, translations } from "./contexts/LanguageContext";
 
 jest.mock("framer-motion", () => {
   const React = require("react");
@@ -38,6 +39,7 @@ jest.mock("framer-motion", () => {
       }
     ),
     AnimatePresence: ({ children }) => <>{children}</>,
+    MotionConfig: ({ children }) => <>{children}</>,
   };
 });
 
@@ -47,6 +49,24 @@ const renderApp = () =>
       <App />
     </HelmetProvider>
   );
+
+const setBrowserLanguages = (languages) => {
+  jest
+    .spyOn(window.navigator, "languages", "get")
+    .mockReturnValue(languages);
+  jest
+    .spyOn(window.navigator, "language", "get")
+    .mockReturnValue(languages[0]);
+};
+
+beforeEach(() => {
+  window.localStorage.clear();
+  window.localStorage.setItem("language", "pt");
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe("App", () => {
   test("renders key sections and actions", () => {
@@ -69,21 +89,91 @@ describe("App", () => {
     ).toBeGreaterThan(0);
   });
 
-  test("toggles language and updates navigation labels", () => {
+  test("toggles language, updates labels and remembers the choice", () => {
     renderApp();
 
-    fireEvent.click(screen.getByRole("button", { name: /switch to english/i }));
+    fireEvent.click(screen.getByRole("button", { name: /mudar para inglês/i }));
 
     expect(screen.getByText("About")).toBeInTheDocument();
     expect(screen.getByText("Contact")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /switch to portuguese/i })
+    ).toBeInTheDocument();
+    expect(window.localStorage.getItem("language")).toBe("en");
   });
 
-  test("cycles theme mode", () => {
+  test("cycles theme mode with translated labels", () => {
     renderApp();
 
-    const themeButton = screen.getByRole("button", { name: /auto mode/i });
-    fireEvent.click(themeButton);
+    fireEvent.click(screen.getByRole("button", { name: /tema automático/i }));
 
-    expect(screen.getByRole("button", { name: /light mode/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /tema claro/i })
+    ).toBeInTheDocument();
+  });
+
+  test("exposes valid landmarks and a plain navigation list", () => {
+    renderApp();
+
+    expect(screen.getByRole("main")).toHaveAttribute("id", "main-content");
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getAllByRole("navigation")).toHaveLength(1);
+    expect(screen.queryByRole("menubar")).not.toBeInTheDocument();
+    expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+  });
+
+  test("contact cards are real links with safe attributes", () => {
+    renderApp();
+
+    const whatsapp = screen.getByRole("link", { name: /whatsapp/i });
+    expect(whatsapp.getAttribute("href")).toMatch(/^https:\/\/wa\.me\/\d+/);
+    expect(whatsapp).toHaveAttribute("rel", "noopener noreferrer");
+
+    const email = screen.getByRole("link", { name: /e-?mail/i });
+    expect(email.getAttribute("href")).toMatch(/^mailto:/);
+  });
+
+  test("timeline cards expand through a real button", () => {
+    renderApp();
+
+    const [firstToggle] = screen.getAllByRole("button", {
+      name: /ver detalhes/i,
+    });
+    expect(firstToggle).toHaveAttribute("aria-expanded", "false");
+
+    const panelId = firstToggle.getAttribute("aria-controls");
+    expect(document.getElementById(panelId)).not.toBeInTheDocument();
+
+    fireEvent.click(firstToggle);
+
+    const [expandedToggle] = screen.getAllByRole("button", {
+      name: /ocultar detalhes/i,
+    });
+    expect(expandedToggle).toHaveAttribute("aria-expanded", "true");
+    expect(document.getElementById(panelId)).toBeInTheDocument();
+  });
+});
+
+describe("language detection", () => {
+  test("PT and EN define exactly the same keys", () => {
+    expect(Object.keys(translations.en).sort()).toEqual(
+      Object.keys(translations.pt).sort()
+    );
+  });
+
+  test("uses the saved choice before the browser language", () => {
+    setBrowserLanguages(["en-US"]);
+    window.localStorage.setItem("language", "pt");
+    expect(detectInitialLanguage()).toBe("pt");
+  });
+
+  test("falls back to the browser language", () => {
+    window.localStorage.clear();
+    setBrowserLanguages(["en-US"]);
+    expect(detectInitialLanguage()).toBe("en");
+
+    setBrowserLanguages(["pt-BR", "en"]);
+    expect(detectInitialLanguage()).toBe("pt");
   });
 });

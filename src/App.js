@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./hooks/useTheme";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
@@ -42,7 +42,7 @@ function AppContent() {
       <ScrollProgress />
 
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        {t("skipToContent")}
       </a>
 
         <div className={darkMode ? "dark-theme" : "light-theme"}>
@@ -51,20 +51,20 @@ function AppContent() {
           className="hero-section hero-section-layered"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="hero-content">
             <motion.div
               className="hero-text"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.05, duration: 0.4 }}
             >
               <motion.h1
                 className="hero-title"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
               >
                 <span className="hero-eyebrow">{t("heroEyebrow")}</span>
                 <span className="hero-title-shell">Rafael Jovaneli</span>
@@ -74,7 +74,7 @@ function AppContent() {
                 className="hero-subtitle"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
+                transition={{ delay: 0.15, duration: 0.4 }}
               >
                 {t("heroSubtitle")}
               </motion.p>
@@ -83,7 +83,7 @@ function AppContent() {
                 className="hero-location"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
               >
                 {t("heroLocation")}
               </motion.p>
@@ -92,7 +92,7 @@ function AppContent() {
                 className="hero-value-props"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.95, duration: 0.5 }}
+                transition={{ delay: 0.25, duration: 0.4 }}
               >
                 <span>{t("heroValue1")}</span>
                 <span>{t("heroValue2")}</span>
@@ -103,7 +103,7 @@ function AppContent() {
                 className="hero-buttons"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
               >
                 <a
                   className="btn-primary hover-lift"
@@ -138,7 +138,7 @@ function AppContent() {
         <motion.nav
           className="navbar"
           id="navigation"
-          aria-label="Main navigation"
+          aria-label={t("mainNavigation")}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
@@ -147,7 +147,7 @@ function AppContent() {
             <button
               className="nav-brand"
               type="button"
-              aria-label="Rafael Henrique Jovaneli - Go to top"
+              aria-label={t("backToHome")}
               onClick={() => scrollToTop()}
             >
               RHJ
@@ -158,7 +158,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => scrollTo("about")}
-                  aria-label={`Navigate to ${t("about")} section`}
+                  aria-label={`${t("navigateToSection")}: ${t("about")}`}
                 >
                   {t("about")}
                 </button>
@@ -167,7 +167,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => scrollTo("skills")}
-                  aria-label={`Navigate to ${t("skills")} section`}
+                  aria-label={`${t("navigateToSection")}: ${t("skills")}`}
                 >
                   {t("skills")}
                 </button>
@@ -176,7 +176,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => scrollTo("experience")}
-                  aria-label={`Navigate to ${t("experience")} section`}
+                  aria-label={`${t("navigateToSection")}: ${t("experience")}`}
                 >
                   {t("experience")}
                 </button>
@@ -185,7 +185,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => scrollTo("contact")}
-                  aria-label={`Navigate to ${t("contact")} section`}
+                  aria-label={`${t("navigateToSection")}: ${t("contact")}`}
                 >
                   {t("contact")}
                 </button>
@@ -196,16 +196,8 @@ function AppContent() {
               <button
                 className="flag-toggle"
                 onClick={toggleLanguage}
-                title={
-                  language === "pt"
-                    ? "Switch to English"
-                    : "Mudar para Português"
-                }
-                aria-label={
-                  language === "pt"
-                    ? "Switch to English"
-                    : "Mudar para Português"
-                }
+                title={t("switchLanguageLabel")}
+                aria-label={t("switchLanguageLabel")}
               >
                 <span
                   className={`flag-icon flag-${
@@ -236,9 +228,7 @@ function AppContent() {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">
-                    Error loading About section
-                  </div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Sintese />
@@ -265,7 +255,7 @@ function AppContent() {
               >
                 <ErrorBoundary
                   fallback={
-                    <div className="error-message">Error loading Skills</div>
+                    <div className="error-message">{t("loadError")}</div>
                   }
                 >
                   <Competencias />
@@ -278,9 +268,7 @@ function AppContent() {
               >
                 <ErrorBoundary
                   fallback={
-                    <div className="error-message">
-                      Error loading Technologies Chart
-                    </div>
+                    <div className="error-message">{t("loadError")}</div>
                   }
                 >
                   <GraficoTecnologias />
@@ -300,7 +288,7 @@ function AppContent() {
             <AnimatedSection animation="slideInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">Error loading Experience</div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Experiencias />
@@ -319,9 +307,7 @@ function AppContent() {
             <AnimatedSection animation="scaleIn" delay={0.1}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">
-                    Error loading Professional Links
-                  </div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <ProfessionalLinks />
@@ -340,7 +326,7 @@ function AppContent() {
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">Error loading Contact</div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Contact />
@@ -366,8 +352,8 @@ function AppContent() {
           <motion.button
             className="back-to-top-btn"
             onClick={scrollToTop}
-            title="Voltar ao Topo"
-            aria-label="Voltar ao Topo"
+            title={t("backToTop")}
+            aria-label={t("backToTop")}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
@@ -386,7 +372,9 @@ function AppContent() {
 function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <MotionConfig reducedMotion="user">
+        <AppContent />
+      </MotionConfig>
     </LanguageProvider>
   );
 }
