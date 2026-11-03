@@ -82,7 +82,7 @@
   gap: 1.5rem;
 }
 
-.option-group h4 {
+.option-group h3 {
   margin: 0 0 1rem 0;
   color: #374151;
   font-size: 0.9rem;
@@ -194,7 +194,7 @@
   border-color: #374151;
 }
 
-.dark-theme .option-group h4 {
+.dark-theme .option-group h3 {
   color: #d1d5db;
 }
 

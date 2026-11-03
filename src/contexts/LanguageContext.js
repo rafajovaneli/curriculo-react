@@ -33,6 +33,7 @@ export const translations = {
     themeLight: "Tema claro",
     themeDark: "Tema escuro",
     loadError: "Não foi possível carregar esta seção.",
+    moreDownloadOptions: "Mais opções de download",
     // Navigation
     about: "Sobre",
     skills: "Skills",
@@ -156,6 +157,7 @@ export const translations = {
     themeLight: "Light theme",
     themeDark: "Dark theme",
     loadError: "Could not load this section.",
+    moreDownloadOptions: "More download options",
     // Navigation
     about: "About",
     skills: "Skills",

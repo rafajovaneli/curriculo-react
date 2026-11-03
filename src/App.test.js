@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
+import { axe } from "jest-axe";
 import App from "./App";
 import { detectInitialLanguage, translations } from "./contexts/LanguageContext";
 
@@ -152,6 +153,45 @@ describe("App", () => {
     });
     expect(expandedToggle).toHaveAttribute("aria-expanded", "true");
     expect(document.getElementById(panelId)).toBeInTheDocument();
+  });
+});
+
+describe("accessibility (axe)", () => {
+  // jsdom has no layout engine, so color-contrast is checked separately in a real browser.
+  const axeOptions = { rules: { "color-contrast": { enabled: false } } };
+
+  test.each([
+    ["pt", "Portuguese"],
+    ["en", "English"],
+  ])("has no axe violations in %s (%s)", async (language) => {
+    window.localStorage.setItem("language", language);
+    const { container } = renderApp();
+
+    const results = await axe(container, axeOptions);
+
+    expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
+  });
+});
+
+describe("accessibility with everything expanded", () => {
+  test("has no axe violations with download options, timeline and skills open", async () => {
+    const { container } = renderApp();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /mais opções de download/i })
+    );
+    screen
+      .getAllByRole("button", { name: /ver detalhes/i })
+      .forEach((button) => fireEvent.click(button));
+    container
+      .querySelectorAll("button.skill-category-toggle")
+      .forEach((button) => fireEvent.click(button));
+
+    const results = await axe(container, {
+      rules: { "color-contrast": { enabled: false } },
+    });
+
+    expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
   });
 });
 
