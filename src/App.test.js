@@ -52,9 +52,11 @@ describe("App", () => {
   test("renders key sections and actions", () => {
     renderApp();
 
-    expect(
-      screen.getByRole("button", { name: /download resume|baixar cv/i })
-    ).toBeInTheDocument();
+    const cvLink = screen.getByRole("link", {
+      name: /download resume|baixar cv/i,
+    });
+    expect(cvLink).toHaveAttribute("href", "/CV_RAFAEL_JOVANELI_PT.pdf");
+    expect(cvLink).toHaveAttribute("rel", expect.stringContaining("noopener"));
     expect(
       screen.getAllByRole("heading", {
         name: /professional links|links profissionais/i,

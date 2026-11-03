@@ -109,22 +109,18 @@ function AppContent() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
               >
-                <button
+                <a
                   className="btn-primary hover-lift"
-                  onClick={() =>
-                    window.open(
-                      `${process.env.PUBLIC_URL}/${
-                        language === "pt"
-                          ? "CV_RAFAEL_JOVANELI_PT.pdf"
-                          : "CV_RAFAEL_JOVANELI_EN.pdf"
-                      }`,
-                      "_blank",
-                      "noopener,noreferrer"
-                    )
-                  }
+                  href={`${process.env.PUBLIC_URL}/${
+                    language === "pt"
+                      ? "CV_RAFAEL_JOVANELI_PT.pdf"
+                      : "CV_RAFAEL_JOVANELI_EN.pdf"
+                  }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {t("downloadResumeShort")}
-                </button>
+                </a>
                 <button
                   className="btn-secondary hover-lift"
                   onClick={() => scrollTo("experience")}

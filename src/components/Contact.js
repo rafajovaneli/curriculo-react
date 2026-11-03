@@ -27,62 +27,22 @@ const Contact = React.memo(() => {
     }, 3000);
   }, []);
 
-  const handlePhoneClick = useCallback(async () => {
-    setClickedCard("phone");
-    try {
-      const message = encodeURIComponent(t("whatsappMessage"));
-      const whatsappUrl = `https://wa.me/${contactInfo.phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${
+    contactInfo.phoneNumber
+  }?text=${encodeURIComponent(t("whatsappMessage"))}`;
+  const emailUrl = `mailto:${contactInfo.email}?subject=${encodeURIComponent(
+    t("emailSubject")
+  )}&body=${encodeURIComponent(t("emailBody"))}`;
 
-      const opened = window.open(whatsappUrl, "_blank");
-      if (opened) {
-        showFeedback(t("openingWhatsapp"), "success");
-      } else {
-        await navigator.clipboard.writeText(contactInfo.phone);
-        showFeedback(t("phoneCopied"), "info");
-      }
-    } catch (error) {
-      showFeedback(`Call: ${contactInfo.phone}`, "info");
-    }
-
-    setTimeout(() => setClickedCard(null), 300);
-  }, [t, contactInfo.phoneNumber, contactInfo.phone, showFeedback]);
-
-  const handleEmailClick = useCallback(async () => {
-    setClickedCard("email");
-    try {
-      const subject = encodeURIComponent(t("emailSubject"));
-      const body = encodeURIComponent(t("emailBody"));
-      const emailUrl = `mailto:${contactInfo.email}?subject=${subject}&body=${body}`;
-
-      const opened = window.open(emailUrl, "_blank");
-      if (opened) {
-        showFeedback(t("openingEmail"), "success");
-      } else {
-        await navigator.clipboard.writeText(contactInfo.email);
-        showFeedback(t("emailCopied"), "info");
-      }
-    } catch (error) {
-      showFeedback(`Email: ${contactInfo.email}`, "info");
-    }
-
-    setTimeout(() => setClickedCard(null), 300);
-  }, [t, contactInfo.email, showFeedback]);
-
-  const handleLocationClick = useCallback(() => {
-    setClickedCard("location");
-    try {
-      const opened = window.open(contactInfo.mapsUrl, "_blank");
-      if (opened) {
-        showFeedback(t("openingMaps"), "success");
-      } else {
-        showFeedback(t("unableOpenMaps"), "error");
-      }
-    } catch (error) {
-      showFeedback(t("unableOpenMaps"), "error");
-    }
-
-    setTimeout(() => setClickedCard(null), 300);
-  }, [contactInfo.mapsUrl, showFeedback, t]);
+  // The links themselves do the navigation; this only gives visual feedback.
+  const handleCardClick = useCallback(
+    (card, message) => {
+      setClickedCard(card);
+      showFeedback(message, "success");
+      setTimeout(() => setClickedCard(null), 300);
+    },
+    [showFeedback]
+  );
 
   return (
     <div className="contact-section">
@@ -101,8 +61,10 @@ const Contact = React.memo(() => {
 
       <div className="contact-grid" role="list">
         <div role="listitem">
-          <motion.button
-            type="button"
+          <motion.a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`contact-card ${
               hoveredCard === "phone" ? "hovered" : ""
             } ${clickedCard === "phone" ? "clicked" : ""}`}
@@ -116,7 +78,7 @@ const Contact = React.memo(() => {
               boxShadow: "0 20px 40px rgba(37, 211, 102, 0.3)",
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={handlePhoneClick}
+            onClick={() => handleCardClick("phone", t("openingWhatsapp"))}
             onHoverStart={() => setHoveredCard("phone")}
             onHoverEnd={() => setHoveredCard(null)}
             aria-label={`${t("phone")}: ${contactInfo.phone}. ${t(
@@ -150,12 +112,12 @@ const Contact = React.memo(() => {
                 />
               )}
             </AnimatePresence>
-          </motion.button>
+          </motion.a>
         </div>
 
         <div role="listitem">
-          <motion.button
-          type="button"
+          <motion.a
+            href={emailUrl}
           className={`contact-card ${
             hoveredCard === "email" ? "hovered" : ""
           } ${clickedCard === "email" ? "clicked" : ""}`}
@@ -169,7 +131,7 @@ const Contact = React.memo(() => {
             boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
           }}
           whileTap={{ scale: 0.95 }}
-          onClick={handleEmailClick}
+          onClick={() => handleCardClick("email", t("openingEmail"))}
           onHoverStart={() => setHoveredCard("email")}
           onHoverEnd={() => setHoveredCard(null)}
           aria-label={`${t("email")}: ${contactInfo.email}. ${t("emailHint")}`}
@@ -201,12 +163,14 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-          </motion.button>
+          </motion.a>
         </div>
 
         <div role="listitem">
-          <motion.button
-          type="button"
+          <motion.a
+            href={contactInfo.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
           className={`contact-card ${
             hoveredCard === "location" ? "hovered" : ""
           } ${clickedCard === "location" ? "clicked" : ""}`}
@@ -220,7 +184,7 @@ const Contact = React.memo(() => {
             boxShadow: "0 20px 40px rgba(239, 68, 68, 0.3)",
           }}
           whileTap={{ scale: 0.95 }}
-          onClick={handleLocationClick}
+          onClick={() => handleCardClick("location", t("openingMaps"))}
           onHoverStart={() => setHoveredCard("location")}
           onHoverEnd={() => setHoveredCard(null)}
           aria-label={`${t("location")}: ${contactInfo.location}. ${t(
@@ -254,7 +218,7 @@ const Contact = React.memo(() => {
               />
             )}
           </AnimatePresence>
-          </motion.button>
+          </motion.a>
         </div>
       </div>
 

@@ -100,6 +100,8 @@ export const translations = {
     // Contact Messages
     whatsappMessage:
       "Olá Rafael! Tenho interesse em discutir uma oportunidade de trabalho com você.",
+    resumeRequestSubject: "Pedido de currículo",
+    resumeRequestBody: "Olá Rafael, gostaria de receber o seu currículo.",
     emailSubject: "Oportunidade de Trabalho - Vamos Conversar",
     emailBody:
       "Olá Rafael,\n\nEncontrei seu perfil e tenho interesse em discutir uma potencial oportunidade de trabalho com você.\n\nAtenciosamente,",
@@ -211,6 +213,8 @@ export const translations = {
     // Contact Messages
     whatsappMessage:
       "Hello Rafael! I'm interested in discussing a job opportunity with you.",
+    resumeRequestSubject: "Resume request",
+    resumeRequestBody: "Hi Rafael, I would like to request your resume.",
     emailSubject: "Job Opportunity - Let's Connect",
     emailBody:
       "Hello Rafael,\n\nI came across your profile and I'm interested in discussing a potential job opportunity with you.\n\nBest regards,",

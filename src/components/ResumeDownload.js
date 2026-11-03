@@ -63,11 +63,6 @@ const ResumeDownload = () => {
     }
   };
 
-  const handleViewOnline = () => {
-    const currentResume = resumeFiles[language];
-    window.open(currentResume.url, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <div className="resume-download-container">
       <div className="resume-download-main">
@@ -146,24 +141,25 @@ const ResumeDownload = () => {
               <div className="option-group">
                 <h4>{t("alternatives")}</h4>
                 <div className="alternative-buttons">
-                  <button
+                  <a
                     className="alt-btn view-online"
-                    onClick={handleViewOnline}
+                    href={resumeFiles[language].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fas fa-eye"></i>
                     <span>{t("viewOnline")}</span>
-                  </button>
+                  </a>
 
-                  <button
+                  <a
                     className="alt-btn email-request"
-                    onClick={() =>
-                      (window.location.href =
-                        "mailto:rafajovaneli@gmail.com?subject=Resume Request&body=Hi Rafael, I would like to request your resume.")
-                    }
+                    href={`mailto:rafajovaneli@gmail.com?subject=${encodeURIComponent(
+                      t("resumeRequestSubject")
+                    )}&body=${encodeURIComponent(t("resumeRequestBody"))}`}
                   >
                     <i className="fas fa-envelope"></i>
                     <span>{t("requestByEmail")}</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
