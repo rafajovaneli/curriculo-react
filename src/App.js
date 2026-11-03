@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { motion, MotionConfig } from "framer-motion";
@@ -18,18 +18,12 @@ import ProfessionalLinks from "./components/ProfessionalLinks";
 import Contact from "./components/Contact";
 import "./App.css";
 import "./styles/optimized.css";
-import { preloadCriticalResources } from "./utils/performance";
 
 function AppContent() {
   const { darkMode, toggleTheme, getThemeIcon, getThemeLabel } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { scrollTo, scrollToTop } = useSmoothScroll();
   const showBackToTop = useScrollVisibility(400);
-
-  // Preload critical resources on mount
-  useEffect(() => {
-    preloadCriticalResources();
-  }, []);
 
   return (
     <>
