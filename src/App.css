@@ -1,3 +1,26 @@
+/* Reboot subset that used to come from Bootstrap. It sits at the very top
+   so every other rule keeps overriding it, as before. */
+body {
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* Elite Senior Developer CV Styling */
 * {
   margin: 0;
@@ -4229,4 +4252,17 @@ main:focus {
   .navbar .nav-controls {
     gap: 0.25rem;
   }
+}
+
+/* Utilities previously provided by Bootstrap's reboot/utilities */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

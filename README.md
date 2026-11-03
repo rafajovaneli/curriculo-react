@@ -6,7 +6,7 @@ Currículo/portfólio em React, publicado em https://rafaeljovaneli.surge.sh.
 
 - React 18 com Create React App (`react-scripts` 5)
 - Framer Motion (animações)
-- Bootstrap 5 e Font Awesome 6
+- Font Awesome 6 (ícones)
 - React Helmet Async (SEO)
 - React Testing Library (testes)
 
