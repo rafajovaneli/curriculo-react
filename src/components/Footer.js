@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <div style={{ textAlign: "center", padding: "2rem 0" }}>
-          <p>&copy; 2025 {t("footerText")}</p>
+          <p>&copy; {t("footerText")}</p>
           <p>{t("builtWith")}</p>
         </div>
       </div>

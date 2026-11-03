@@ -10,13 +10,13 @@ const ResumeDownload = () => {
 
   const resumeFiles = {
     pt: {
-      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_PT_2025.pdf`,
-      filename: "CV_RAFAEL_JOVANELI_PT_2025.pdf",
+      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_PT.pdf`,
+      filename: "CV_RAFAEL_JOVANELI_PT.pdf",
       label: "Português (PT-BR)",
     },
     en: {
-      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_EN_2025.pdf`,
-      filename: "CV_RAFAEL_JOVANELI_EN_2025.pdf",
+      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_EN.pdf`,
+      filename: "CV_RAFAEL_JOVANELI_EN.pdf",
       label: "English (EN-US)",
     },
   };

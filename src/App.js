@@ -115,8 +115,8 @@ function AppContent() {
                     window.open(
                       `${process.env.PUBLIC_URL}/${
                         language === "pt"
-                          ? "CV_RAFAEL_JOVANELI_PT_2025.pdf"
-                          : "CV_RAFAEL_JOVANELI_EN_2025.pdf"
+                          ? "CV_RAFAEL_JOVANELI_PT.pdf"
+                          : "CV_RAFAEL_JOVANELI_EN.pdf"
                       }`,
                       "_blank",
                       "noopener,noreferrer"
