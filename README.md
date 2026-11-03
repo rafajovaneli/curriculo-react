@@ -1,44 +1,57 @@
-# Rafael Jovaneli - Curriculo React
+# Rafael Jovaneli - Currículo
 
-Portfolio/curriculo em React focado em apresentar experiencia profissional, competencias tecnicas e canais de contato.
+Currículo/portfólio em React, publicado em https://rafaeljovaneli.surge.sh.
 
 ## Stack
 
-- React 18
-- Create React App (`react-scripts`)
-- Framer Motion
-- Bootstrap 5
-- Font Awesome
-- React Helmet Async
-- React Testing Library
+- React 18 com Create React App (`react-scripts` 5)
+- Framer Motion (animações)
+- Bootstrap 5 e Font Awesome 6
+- React Helmet Async (SEO)
+- React Testing Library (testes)
 
-## Estrutura
+## Requisitos
 
-- `src/App.js`: composicao principal da pagina
-- `src/components`: secoes e componentes reutilizaveis
-- `src/hooks`: hooks de tema, scroll e animacao
-- `src/contexts`: contexto de idioma
-- `src/utils`: utilitarios de performance
-- `public`: manifesto e assets publicos
+- Node.js 18 ou superior (o arquivo `.nvmrc` indica a versão 20)
 
 ## Scripts
 
-- `npm start`: ambiente local
-- `npm test`: testes
-- `npm run build`: build de producao
-- `npm run deploy`: publica no GitHub Pages
+| Comando | O que faz |
+| --- | --- |
+| `npm ci` | instala as dependências exatamente como no `package-lock.json` |
+| `npm start` | servidor de desenvolvimento |
+| `npm test` | testes em modo interativo (`CI=true npm test -- --watchAll=false` roda uma vez) |
+| `npm run build` | build de produção na pasta `build/` (assume que o site fica na raiz do domínio) |
+| `npm run deploy:surge` | gera o build, cria o `200.html` e publica no Surge |
 
-## Melhorias aplicadas
+## Estrutura
 
-- simplificacao da inicializacao da aplicacao
-- remocao da configuracao de obfuscacao e do service worker manual
-- ajuste de acessibilidade semantica e navegacao por teclado
-- correcao de `ErrorBoundary`
-- alinhamento das configuracoes de SEO/deploy
-- atualizacao da base minima de testes
+- `src/App.js`: composição da página (cabeçalho, navegação e seções)
+- `src/components`: seções e componentes reutilizáveis
+- `src/contexts/LanguageContext.js`: textos em PT-BR e EN, detecção e persistência do idioma
+- `src/hooks`: tema, scroll e animação
+- `public`: PDFs do currículo, sitemap, `robots.txt`, manifesto e ícones
 
-## Deploy
+## Idioma e tema
 
-O projeto esta configurado para publicar em:
+- O idioma inicial vem da escolha salva no navegador (`localStorage`) ou, na primeira visita, do idioma do navegador (português se for `pt`, inglês nos demais).
+- O tema segue a preferência do sistema e pode ser alternado entre automático, claro e escuro.
 
-- `https://rafajovaneli.github.io/curriculo-react`
+## Deploy no Surge
+
+1. Faça login uma vez: `npx surge login`.
+2. Publique com `npm run deploy:surge`.
+3. O domínio está fixado em `public/CNAME` e no script `deploy:surge`.
+
+Depois de publicar, confira se os PDFs respondem como `application/pdf`:
+
+```
+curl -sI https://rafaeljovaneli.surge.sh/CV_RAFAEL_JOVANELI_PT.pdf | grep -i content-type
+```
+
+## Segurança e privacidade
+
+- É um site estático: não tem backend, formulário, cookies nem analytics.
+- Telefone, e-mail e cidade são públicos por escolha do autor (é um currículo).
+- O Surge não permite configurar cabeçalhos HTTP (CSP, X-Frame-Options, HSTS). Para ter esses cabeçalhos seria preciso migrar para uma hospedagem que aceite um arquivo `_headers`, como Cloudflare Pages ou Netlify.
+- Os mapas de código-fonte ficam desligados no build (`.env.production`).
