@@ -4266,3 +4266,19 @@ main:focus {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* Optional measurable result of an experience (rendered only when provided) */
+.timeline-result {
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid var(--accent-color);
+  border-radius: 0 8px 8px 0;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--text-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.timeline-result-label {
+  font-weight: 700;
+}

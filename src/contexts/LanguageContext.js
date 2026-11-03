@@ -100,6 +100,7 @@ export const translations = {
     experienceStackLabel: "Stack",
     experienceDomainLabel: "Contexto",
     experienceHighlightsLabel: "Destaques",
+    experienceResultLabel: "Resultado:",
     experienceExpandLabel: "Ver detalhes",
     experienceCollapseLabel: "Ocultar detalhes",
 
@@ -227,6 +228,7 @@ export const translations = {
     experienceStackLabel: "Stack",
     experienceDomainLabel: "Context",
     experienceHighlightsLabel: "Highlights",
+    experienceResultLabel: "Result:",
     experienceExpandLabel: "View details",
     experienceCollapseLabel: "Hide details",
 

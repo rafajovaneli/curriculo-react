@@ -1,6 +1,7 @@
 import React, { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
+import ExperienceResult from "./ExperienceResult";
 
 const Experiencias = memo(function Experiencias() {
   const { language, t } = useLanguage();
@@ -394,6 +395,11 @@ const Experiencias = memo(function Experiencias() {
                   </div>
                 </div>
               </div>
+
+              <ExperienceResult
+                label={t("experienceResultLabel")}
+                text={exp.resultado}
+              />
 
               <div className="timeline-highlights">
                 <span className="timeline-preview-label">
