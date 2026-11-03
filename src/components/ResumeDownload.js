@@ -74,7 +74,7 @@ const ResumeDownload = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="btn-content">
+          <span className="btn-content">
             {downloadStatus === "downloading" && (
               <i className="fas fa-spinner fa-spin"></i>
             )}
@@ -89,7 +89,7 @@ const ResumeDownload = () => {
               {downloadStatus === "error" && t("downloadError")}
               {!downloadStatus && t("downloadResume")}
             </span>
-          </div>
+          </span>
         </motion.button>
 
         {/* Options Toggle */}

@@ -4587,3 +4587,40 @@ a.contact-card {
 a.alt-btn {
   text-decoration: none;
 }
+
+/* Navigation list (ul/li instead of ARIA menubar) */
+ul.nav-center {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Timeline: toggle is a real button; node is decorative */
+button.timeline-expand-icon {
+  position: static;
+  width: auto;
+  height: auto;
+  min-height: 44px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+}
+
+button.timeline-expand-icon:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.timeline-node {
+  cursor: default;
+}
+
+main:focus {
+  outline: none;
+}

@@ -45,13 +45,9 @@ function AppContent() {
         Skip to main content
       </a>
 
-        <div
-          className={darkMode ? "dark-theme" : "light-theme"}
-          id="main-content"
-          role="main"
-        >
+        <div className={darkMode ? "dark-theme" : "light-theme"}>
         {/* Hero Section */}
-        <motion.section
+        <motion.header
           className="hero-section hero-section-layered"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -71,7 +67,7 @@ function AppContent() {
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
                 <span className="hero-eyebrow">{t("heroEyebrow")}</span>
-                <div className="hero-title-shell">Rafael Jovaneli</div>
+                <span className="hero-title-shell">Rafael Jovaneli</span>
               </motion.h1>
 
               <motion.p
@@ -136,13 +132,12 @@ function AppContent() {
               </motion.div>
             </motion.div>
           </div>
-        </motion.section>
+        </motion.header>
 
         {/* Navigation */}
         <motion.nav
           className="navbar"
           id="navigation"
-          role="navigation"
           aria-label="Main navigation"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -158,40 +153,44 @@ function AppContent() {
               RHJ
             </button>
 
-            <div
-              className="nav-center"
-              role="menubar"
-              aria-label="Navigation menu"
-            >
-              <button
-                onClick={() => scrollTo("about")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("about")} section`}
-              >
-                {t("about")}
-              </button>
-              <button
-                onClick={() => scrollTo("skills")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("skills")} section`}
-              >
-                {t("skills")}
-              </button>
-              <button
-                onClick={() => scrollTo("experience")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("experience")} section`}
-              >
-                {t("experience")}
-              </button>
-              <button
-                onClick={() => scrollTo("contact")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("contact")} section`}
-              >
-                {t("contact")}
-              </button>
-            </div>
+            <ul className="nav-center">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("about")}
+                  aria-label={`Navigate to ${t("about")} section`}
+                >
+                  {t("about")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("skills")}
+                  aria-label={`Navigate to ${t("skills")} section`}
+                >
+                  {t("skills")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("experience")}
+                  aria-label={`Navigate to ${t("experience")} section`}
+                >
+                  {t("experience")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("contact")}
+                  aria-label={`Navigate to ${t("contact")} section`}
+                >
+                  {t("contact")}
+                </button>
+              </li>
+            </ul>
 
             <div className="nav-controls">
               <button
@@ -208,12 +207,12 @@ function AppContent() {
                     : "Mudar para Português"
                 }
               >
-                <div
+                <span
                   className={`flag-icon flag-${
                     language === "pt" ? "us" : "br"
                   }`}
                   aria-hidden="true"
-                ></div>
+                ></span>
               </button>
 
               <button
@@ -230,11 +229,9 @@ function AppContent() {
           </div>
         </motion.nav>
 
+        <main id="main-content" tabIndex={-1}>
         {/* About Section */}
-        <section id="about" className="section" aria-labelledby="about-heading">
-          <h2 id="about-heading" className="visually-hidden">
-            {t("aboutTitle")}
-          </h2>
+        <section id="about" className="section" aria-label={t("aboutTitle")}>
           <div className="container">
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
@@ -297,11 +294,8 @@ function AppContent() {
         <section
           id="experience"
           className="section"
-          aria-labelledby="experience-heading"
+          aria-label={t("experienceTitle")}
         >
-          <h2 id="experience-heading" className="visually-hidden">
-            {t("experienceTitle")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="slideInUp" delay={0.2}>
               <ErrorBoundary
@@ -319,11 +313,8 @@ function AppContent() {
         <section
           id="professional"
           className="section alt-bg"
-          aria-labelledby="professional-heading"
+          aria-label={t("professionalLinks")}
         >
-          <h2 id="professional-heading" className="visually-hidden">
-            {t("professionalLinks")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="scaleIn" delay={0.1}>
               <ErrorBoundary
@@ -343,11 +334,8 @@ function AppContent() {
         <section
           id="contact"
           className="section"
-          aria-labelledby="contact-heading"
+          aria-label={t("contactMe")}
         >
-          <h2 id="contact-heading" className="visually-hidden">
-            {t("contactMe")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
@@ -360,6 +348,8 @@ function AppContent() {
             </AnimatedSection>
           </div>
         </section>
+
+        </main>
 
         {/* Floating Contact Button */}
         <button
