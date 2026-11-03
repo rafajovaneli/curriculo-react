@@ -12,7 +12,7 @@ const SEOHead = ({
   section = "home",
 }) => {
   const { language } = useLanguage();
-  const siteUrl = "https://rafajovaneli.github.io/curriculo-react";
+  const siteUrl = "https://rafaeljovaneli.surge.sh";
 
   const siteTitle = "Rafael Jovaneli - Senior Java Developer";
   const siteDescription =
@@ -45,7 +45,7 @@ const SEOHead = ({
     image: pageImage,
     sameAs: [
       "https://github.com/rafajovaneli",
-      "https://linkedin.com/in/rafajovaneli",
+      "https://www.linkedin.com/in/rafael-jovaneli-a495b420",
     ],
     knowsAbout: [
       "React",
@@ -80,8 +80,8 @@ const SEOHead = ({
       <meta property="og:type" content={type} />
       <meta property="og:url" content={pageUrl} />
       <meta property="og:image" content={pageImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content="512" />
+      <meta property="og:image:height" content="512" />
       <meta property="og:site_name" content="Rafael Jovaneli Portfolio" />
       <meta
         property="og:locale"
@@ -89,7 +89,7 @@ const SEOHead = ({
       />
 
       {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />

@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 // Create the language context
 const LanguageContext = createContext();
@@ -15,6 +22,17 @@ export const useLanguage = () => {
 // Define translations
 export const translations = {
   pt: {
+    // Accessibility labels
+    skipToContent: "Pular para o conteúdo principal",
+    mainNavigation: "Navegação principal",
+    navigateToSection: "Ir para a seção",
+    backToHome: "Rafael H. Jovaneli - Voltar ao topo",
+    backToTop: "Voltar ao topo",
+    switchLanguageLabel: "Mudar para inglês",
+    themeAuto: "Tema automático",
+    themeLight: "Tema claro",
+    themeDark: "Tema escuro",
+    loadError: "Não foi possível carregar esta seção.",
     // Navigation
     about: "Sobre",
     skills: "Skills",
@@ -100,6 +118,8 @@ export const translations = {
     // Contact Messages
     whatsappMessage:
       "Olá Rafael! Tenho interesse em discutir uma oportunidade de trabalho com você.",
+    resumeRequestSubject: "Pedido de currículo",
+    resumeRequestBody: "Olá Rafael, gostaria de receber o seu currículo.",
     emailSubject: "Oportunidade de Trabalho - Vamos Conversar",
     emailBody:
       "Olá Rafael,\n\nEncontrei seu perfil e tenho interesse em discutir uma potencial oportunidade de trabalho com você.\n\nAtenciosamente,",
@@ -126,6 +146,17 @@ export const translations = {
   },
 
   en: {
+    // Accessibility labels
+    skipToContent: "Skip to main content",
+    mainNavigation: "Main navigation",
+    navigateToSection: "Go to section",
+    backToHome: "Rafael H. Jovaneli - Back to top",
+    backToTop: "Back to top",
+    switchLanguageLabel: "Switch to Portuguese",
+    themeAuto: "Auto theme",
+    themeLight: "Light theme",
+    themeDark: "Dark theme",
+    loadError: "Could not load this section.",
     // Navigation
     about: "About",
     skills: "Skills",
@@ -211,6 +242,8 @@ export const translations = {
     // Contact Messages
     whatsappMessage:
       "Hello Rafael! I'm interested in discussing a job opportunity with you.",
+    resumeRequestSubject: "Resume request",
+    resumeRequestBody: "Hi Rafael, I would like to request your resume.",
     emailSubject: "Job Opportunity - Let's Connect",
     emailBody:
       "Hello Rafael,\n\nI came across your profile and I'm interested in discussing a potential job opportunity with you.\n\nBest regards,",
@@ -237,23 +270,57 @@ export const translations = {
   },
 };
 
+const STORAGE_KEY = "language";
+const SUPPORTED_LANGUAGES = ["pt", "en"];
+
+// Saved choice first, then the browser language (PT-BR is the default).
+export const detectInitialLanguage = () => {
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (SUPPORTED_LANGUAGES.includes(saved)) return saved;
+  } catch (error) {
+    // Ignore storage failures (private mode, blocked storage).
+  }
+
+  const browserLanguage = (
+    (typeof navigator !== "undefined" &&
+      ((navigator.languages && navigator.languages[0]) ||
+        navigator.language)) ||
+    ""
+  ).toLowerCase();
+
+  if (browserLanguage.startsWith("pt")) return "pt";
+  return browserLanguage ? "en" : "pt";
+};
+
 // Create the language provider component
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState("pt");
+  const [language, setLanguage] = useState(detectInitialLanguage);
 
-  const toggleLanguage = () => {
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // Ignore storage failures.
+    }
+  }, [language]);
+
+  const toggleLanguage = useCallback(() => {
     setLanguage((prev) => (prev === "pt" ? "en" : "pt"));
-  };
+  }, []);
 
-  // Simple translation function that only handles string keys
-  const t = (key) => {
-    return translations[language][key] || key;
-  };
+  const t = useCallback(
+    (key) => translations[language][key] || key,
+    [language]
+  );
+
+  const value = useMemo(
+    () => ({ language, toggleLanguage, t, translations }),
+    [language, toggleLanguage, t]
+  );
 
   return (
-    <LanguageContext.Provider
-      value={{ language, toggleLanguage, t, translations }}
-    >
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

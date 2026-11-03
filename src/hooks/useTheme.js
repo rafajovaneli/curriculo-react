@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const getStoredTheme = () => {
   if (typeof window === "undefined") {
@@ -22,6 +23,7 @@ const getSystemPrefersDark = () => {
 };
 
 export const useTheme = () => {
+  const { t } = useLanguage();
   const [themeMode, setThemeMode] = useState(() => {
     const savedTheme = getStoredTheme();
     return savedTheme || "auto"; // auto, light, dark
@@ -104,13 +106,11 @@ export const useTheme = () => {
   const getThemeLabel = () => {
     switch (themeMode) {
       case "light":
-        return "Light Mode";
+        return t("themeLight");
       case "dark":
-        return "Dark Mode";
-      case "auto":
-        return "Auto Mode";
+        return t("themeDark");
       default:
-        return "Auto Mode";
+        return t("themeAuto");
     }
   };
 

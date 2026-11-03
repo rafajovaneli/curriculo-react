@@ -1,7 +1,7 @@
 {
   "short_name": "Rafael Jovaneli",
-  "name": "Rafael Jovaneli - Full Stack Developer Portfolio",
-  "description": "Professional portfolio showcasing full stack development expertise in React, Node.js, and modern web technologies",
+  "name": "Rafael Jovaneli - Senior Java Developer",
+  "description": "Currículo e portfólio de Rafael Jovaneli, Senior Java Developer: Java, Spring Boot, cloud e mensageria.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -26,10 +26,14 @@
   "orientation": "portrait-primary",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "categories": ["portfolio", "developer", "technology"],
+  "categories": [
+    "portfolio",
+    "developer",
+    "technology"
+  ],
   "lang": "pt-BR",
   "dir": "ltr",
-  "scope": "/curriculo-react/",
+  "scope": "/",
   "prefer_related_applications": false,
   "shortcuts": [
     {
@@ -37,21 +41,36 @@
       "short_name": "About",
       "description": "Learn about Rafael's background and experience",
       "url": "./#about",
-      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Skills",
       "short_name": "Skills",
       "description": "View technical skills and expertise",
       "url": "./#skills",
-      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Contact",
       "short_name": "Contact",
       "description": "Get in touch with Rafael",
       "url": "./#contact",
-      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

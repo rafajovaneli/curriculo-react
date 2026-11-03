@@ -355,27 +355,17 @@ const Experiencias = memo(function Experiencias() {
             transition={{ delay: idx * 0.1, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {/* Timeline Node */}
-            <motion.button
-              type="button"
-              className="timeline-node"
-              whileHover={{ scale: 1.2 }}
-              onClick={() => toggleExperience(idx)}
-              aria-label={`${exp.empresa} - ${exp.periodo}`}
-              aria-expanded={Boolean(expandedExperiences[idx])}
-            >
+            {/* Timeline Node (decorative) */}
+            <div className="timeline-node" aria-hidden="true">
               <div className="timeline-node-inner">
                 <i className="fas fa-briefcase"></i>
               </div>
-            </motion.button>
+            </div>
 
             {/* Timeline Content */}
-            <motion.button
-              type="button"
+            <motion.article
               className="timeline-content"
-              onClick={() => toggleExperience(idx)}
               whileHover={{ scale: 1.02 }}
-              aria-expanded={Boolean(expandedExperiences[idx])}
             >
               <div className="timeline-header">
                 <h3 className="timeline-company">{exp.empresa}</h3>
@@ -416,26 +406,33 @@ const Experiencias = memo(function Experiencias() {
                 </ul>
               </div>
 
-              {/* Expand/Collapse Icon */}
-              <motion.div
+              {/* Expand/Collapse toggle */}
+              <button
+                type="button"
                 className="timeline-expand-icon"
-                animate={{
-                  rotate: expandedExperiences[idx] ? 180 : 0,
-                }}
-                transition={{ duration: 0.3 }}
+                onClick={() => toggleExperience(idx)}
+                aria-expanded={Boolean(expandedExperiences[idx])}
+                aria-controls={`experience-details-${idx}`}
               >
-                <i className="fas fa-chevron-down"></i>
+                <motion.i
+                  className="fas fa-chevron-down"
+                  aria-hidden="true"
+                  animate={{ rotate: expandedExperiences[idx] ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                />
                 <span className="timeline-expand-text">
                   {expandedExperiences[idx]
                     ? t("experienceCollapseLabel")
                     : t("experienceExpandLabel")}
+                  <span className="visually-hidden"> — {exp.empresa}</span>
                 </span>
-              </motion.div>
+              </button>
 
               {/* Expandable Activities */}
               <AnimatePresence>
                 {expandedExperiences[idx] && (
                   <motion.div
+                    id={`experience-details-${idx}`}
                     className="timeline-activities"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
@@ -459,7 +456,7 @@ const Experiencias = memo(function Experiencias() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.button>
+            </motion.article>
           </motion.div>
         ))}
       </div>

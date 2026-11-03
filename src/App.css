@@ -26,7 +26,7 @@
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
@@ -1458,49 +1458,6 @@ footer {
       0 0 20px rgba(0, 255, 255, 0.3);
   }
 }
-/* Security Protection Styles */
-body {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Disable text selection on specific elements */
-* {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Allow selection only for input fields if needed */
-input,
-textarea {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-/* Hide scrollbars to make inspection harder */
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-/* Disable image dragging */
-img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-  pointer-events: none;
-}
-
 /* Disable highlighting */
 ::selection {
   background: transparent;
@@ -4386,7 +4343,7 @@ html {
   gap: 0.85rem;
   margin-bottom: 1rem;
   color: #fff;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .light-theme .hero-title {
@@ -4440,7 +4397,7 @@ html {
   color: rgba(255, 255, 255, 0.94);
   text-shadow: none;
   animation: none;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.35rem;
   font-weight: 600;
 }
@@ -4601,5 +4558,130 @@ html {
 
   .timeline-preview-card-stack {
     padding-bottom: 0.95rem;
+  }
+}
+
+/* Accessibility: AA contrast for the tertiary button on the light theme */
+.light-theme .btn-tertiary {
+  color: #c2005e;
+  border-color: #c2005e;
+  text-shadow: none;
+}
+
+/* Links styled as buttons/cards (real anchors instead of window.open buttons) */
+a.btn-primary,
+a.btn-secondary,
+a.btn-tertiary {
+  display: inline-block;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.contact-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.alt-btn {
+  text-decoration: none;
+}
+
+/* Navigation list (ul/li instead of ARIA menubar) */
+ul.nav-center {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Timeline: toggle is a real button; node is decorative */
+button.timeline-expand-icon {
+  position: static;
+  width: auto;
+  height: auto;
+  min-height: 44px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+}
+
+button.timeline-expand-icon:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.timeline-node {
+  cursor: default;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Accessibility: WCAG AA text contrast on the light theme.
+   Decorative uses (borders, gradients) keep the original brand colors. */
+.light-theme .btn-primary,
+.light-theme .about-detail-title.primary,
+.light-theme .contact-hint,
+.light-theme .maps-link,
+.light-theme .timeline-period {
+  color: #4f46e5;
+}
+
+.light-theme .btn-primary {
+  border-color: #4f46e5;
+}
+
+.light-theme .btn-secondary,
+.light-theme .about-detail-title.accent {
+  color: #0e7490;
+}
+
+.light-theme .btn-secondary {
+  border-color: #0e7490;
+}
+
+.light-theme .about-detail-title.success {
+  color: #047857;
+}
+
+/* Light theme: the LinkedIn link lost its blue background to
+   `.professional-section * { background-color: transparent !important }`,
+   leaving white text on white. Restore it (white on #0077b5 = 4.7:1). */
+.light-theme .professional-section .simple-linkedin-link {
+  background-color: #0077b5 !important;
+  color: #fff;
+}
+
+.light-theme .professional-section .simple-linkedin-link:hover {
+  background-color: #005885 !important;
+  color: #fff;
+}
+
+.light-theme .professional-section .simple-linkedin-link i {
+  color: inherit;
+}
+
+/* White text on the resume button gradient: 6.3:1 to 7:1 instead of 3.7:1 */
+.light-theme .download-resume-btn.primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%);
+}
+
+/* Respect the OS "reduce motion" setting for every CSS animation/transition */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

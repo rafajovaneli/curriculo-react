@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./hooks/useTheme";
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
@@ -18,18 +18,12 @@ import ProfessionalLinks from "./components/ProfessionalLinks";
 import Contact from "./components/Contact";
 import "./App.css";
 import "./styles/optimized.css";
-import { preloadCriticalResources } from "./utils/performance";
 
 function AppContent() {
   const { darkMode, toggleTheme, getThemeIcon, getThemeLabel } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { scrollTo, scrollToTop } = useSmoothScroll();
   const showBackToTop = useScrollVisibility(400);
-
-  // Preload critical resources on mount
-  useEffect(() => {
-    preloadCriticalResources();
-  }, []);
 
   return (
     <>
@@ -42,43 +36,39 @@ function AppContent() {
       <ScrollProgress />
 
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        {t("skipToContent")}
       </a>
 
-        <div
-          className={darkMode ? "dark-theme" : "light-theme"}
-          id="main-content"
-          role="main"
-        >
+        <div className={darkMode ? "dark-theme" : "light-theme"}>
         {/* Hero Section */}
-        <motion.section
+        <motion.header
           className="hero-section hero-section-layered"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="hero-content">
             <motion.div
               className="hero-text"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.05, duration: 0.4 }}
             >
               <motion.h1
                 className="hero-title"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
               >
                 <span className="hero-eyebrow">{t("heroEyebrow")}</span>
-                <div className="hero-title-shell">Rafael Jovaneli</div>
+                <span className="hero-title-shell">Rafael Jovaneli</span>
               </motion.h1>
 
               <motion.p
                 className="hero-subtitle"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
+                transition={{ delay: 0.15, duration: 0.4 }}
               >
                 {t("heroSubtitle")}
               </motion.p>
@@ -87,7 +77,7 @@ function AppContent() {
                 className="hero-location"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
               >
                 {t("heroLocation")}
               </motion.p>
@@ -96,7 +86,7 @@ function AppContent() {
                 className="hero-value-props"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.95, duration: 0.5 }}
+                transition={{ delay: 0.25, duration: 0.4 }}
               >
                 <span>{t("heroValue1")}</span>
                 <span>{t("heroValue2")}</span>
@@ -107,24 +97,20 @@ function AppContent() {
                 className="hero-buttons"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
               >
-                <button
+                <a
                   className="btn-primary hover-lift"
-                  onClick={() =>
-                    window.open(
-                      `${process.env.PUBLIC_URL}/${
-                        language === "pt"
-                          ? "CV_RAFAEL_JOVANELI_PT_2025.pdf"
-                          : "CV_RAFAEL_JOVANELI_EN_2025.pdf"
-                      }`,
-                      "_blank",
-                      "noopener,noreferrer"
-                    )
-                  }
+                  href={`${process.env.PUBLIC_URL}/${
+                    language === "pt"
+                      ? "CV_RAFAEL_JOVANELI_PT.pdf"
+                      : "CV_RAFAEL_JOVANELI_EN.pdf"
+                  }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {t("downloadResumeShort")}
-                </button>
+                </a>
                 <button
                   className="btn-secondary hover-lift"
                   onClick={() => scrollTo("experience")}
@@ -140,14 +126,13 @@ function AppContent() {
               </motion.div>
             </motion.div>
           </div>
-        </motion.section>
+        </motion.header>
 
         {/* Navigation */}
         <motion.nav
           className="navbar"
           id="navigation"
-          role="navigation"
-          aria-label="Main navigation"
+          aria-label={t("mainNavigation")}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
@@ -156,68 +141,64 @@ function AppContent() {
             <button
               className="nav-brand"
               type="button"
-              aria-label="Rafael Henrique Jovaneli - Go to top"
+              aria-label={t("backToHome")}
               onClick={() => scrollToTop()}
             >
               RHJ
             </button>
 
-            <div
-              className="nav-center"
-              role="menubar"
-              aria-label="Navigation menu"
-            >
-              <button
-                onClick={() => scrollTo("about")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("about")} section`}
-              >
-                {t("about")}
-              </button>
-              <button
-                onClick={() => scrollTo("skills")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("skills")} section`}
-              >
-                {t("skills")}
-              </button>
-              <button
-                onClick={() => scrollTo("experience")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("experience")} section`}
-              >
-                {t("experience")}
-              </button>
-              <button
-                onClick={() => scrollTo("contact")}
-                role="menuitem"
-                aria-label={`Navigate to ${t("contact")} section`}
-              >
-                {t("contact")}
-              </button>
-            </div>
+            <ul className="nav-center">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("about")}
+                  aria-label={`${t("navigateToSection")}: ${t("about")}`}
+                >
+                  {t("about")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("skills")}
+                  aria-label={`${t("navigateToSection")}: ${t("skills")}`}
+                >
+                  {t("skills")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("experience")}
+                  aria-label={`${t("navigateToSection")}: ${t("experience")}`}
+                >
+                  {t("experience")}
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollTo("contact")}
+                  aria-label={`${t("navigateToSection")}: ${t("contact")}`}
+                >
+                  {t("contact")}
+                </button>
+              </li>
+            </ul>
 
             <div className="nav-controls">
               <button
                 className="flag-toggle"
                 onClick={toggleLanguage}
-                title={
-                  language === "pt"
-                    ? "Switch to English"
-                    : "Mudar para Português"
-                }
-                aria-label={
-                  language === "pt"
-                    ? "Switch to English"
-                    : "Mudar para Português"
-                }
+                title={t("switchLanguageLabel")}
+                aria-label={t("switchLanguageLabel")}
               >
-                <div
+                <span
                   className={`flag-icon flag-${
                     language === "pt" ? "us" : "br"
                   }`}
                   aria-hidden="true"
-                ></div>
+                ></span>
               </button>
 
               <button
@@ -234,18 +215,14 @@ function AppContent() {
           </div>
         </motion.nav>
 
+        <main id="main-content" tabIndex={-1}>
         {/* About Section */}
-        <section id="about" className="section" aria-labelledby="about-heading">
-          <h2 id="about-heading" className="visually-hidden">
-            {t("aboutTitle")}
-          </h2>
+        <section id="about" className="section" aria-label={t("aboutTitle")}>
           <div className="container">
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">
-                    Error loading About section
-                  </div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Sintese />
@@ -272,7 +249,7 @@ function AppContent() {
               >
                 <ErrorBoundary
                   fallback={
-                    <div className="error-message">Error loading Skills</div>
+                    <div className="error-message">{t("loadError")}</div>
                   }
                 >
                   <Competencias />
@@ -285,9 +262,7 @@ function AppContent() {
               >
                 <ErrorBoundary
                   fallback={
-                    <div className="error-message">
-                      Error loading Technologies Chart
-                    </div>
+                    <div className="error-message">{t("loadError")}</div>
                   }
                 >
                   <GraficoTecnologias />
@@ -301,16 +276,13 @@ function AppContent() {
         <section
           id="experience"
           className="section"
-          aria-labelledby="experience-heading"
+          aria-label={t("experienceTitle")}
         >
-          <h2 id="experience-heading" className="visually-hidden">
-            {t("experienceTitle")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="slideInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">Error loading Experience</div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Experiencias />
@@ -323,18 +295,13 @@ function AppContent() {
         <section
           id="professional"
           className="section alt-bg"
-          aria-labelledby="professional-heading"
+          aria-label={t("professionalLinks")}
         >
-          <h2 id="professional-heading" className="visually-hidden">
-            {t("professionalLinks")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="scaleIn" delay={0.1}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">
-                    Error loading Professional Links
-                  </div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <ProfessionalLinks />
@@ -347,16 +314,13 @@ function AppContent() {
         <section
           id="contact"
           className="section"
-          aria-labelledby="contact-heading"
+          aria-label={t("contactMe")}
         >
-          <h2 id="contact-heading" className="visually-hidden">
-            {t("contactMe")}
-          </h2>
           <div className="container">
             <AnimatedSection animation="fadeInUp" delay={0.2}>
               <ErrorBoundary
                 fallback={
-                  <div className="error-message">Error loading Contact</div>
+                  <div className="error-message">{t("loadError")}</div>
                 }
               >
                 <Contact />
@@ -364,6 +328,8 @@ function AppContent() {
             </AnimatedSection>
           </div>
         </section>
+
+        </main>
 
         {/* Floating Contact Button */}
         <button
@@ -380,8 +346,8 @@ function AppContent() {
           <motion.button
             className="back-to-top-btn"
             onClick={scrollToTop}
-            title="Voltar ao Topo"
-            aria-label="Voltar ao Topo"
+            title={t("backToTop")}
+            aria-label={t("backToTop")}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
@@ -400,7 +366,9 @@ function AppContent() {
 function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <MotionConfig reducedMotion="user">
+        <AppContent />
+      </MotionConfig>
     </LanguageProvider>
   );
 }

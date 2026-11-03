@@ -49,14 +49,26 @@ Object.defineProperty(window, 'open', {
   value: jest.fn(() => ({ closed: false })),
 });
 
+// In-memory Storage so persistence (theme, language) can be tested for real.
+const createMemoryStorage = () => {
+  let store = {};
+  return {
+    getItem: (key) => (key in store ? store[key] : null),
+    setItem: (key, value) => {
+      store[key] = String(value);
+    },
+    removeItem: (key) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+};
+
 Object.defineProperty(window, 'localStorage', {
   writable: true,
-  value: {
-    getItem: jest.fn(() => null),
-    setItem: jest.fn(),
-    removeItem: jest.fn(),
-    clear: jest.fn(),
-  },
+  value: createMemoryStorage(),
 });
 
 Object.defineProperty(navigator, 'clipboard', {

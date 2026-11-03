@@ -10,13 +10,13 @@ const ResumeDownload = () => {
 
   const resumeFiles = {
     pt: {
-      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_PT_2025.pdf`,
-      filename: "CV_RAFAEL_JOVANELI_PT_2025.pdf",
+      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_PT.pdf`,
+      filename: "CV_RAFAEL_JOVANELI_PT.pdf",
       label: "Português (PT-BR)",
     },
     en: {
-      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_EN_2025.pdf`,
-      filename: "CV_RAFAEL_JOVANELI_EN_2025.pdf",
+      url: `${process.env.PUBLIC_URL}/CV_RAFAEL_JOVANELI_EN.pdf`,
+      filename: "CV_RAFAEL_JOVANELI_EN.pdf",
       label: "English (EN-US)",
     },
   };
@@ -63,11 +63,6 @@ const ResumeDownload = () => {
     }
   };
 
-  const handleViewOnline = () => {
-    const currentResume = resumeFiles[language];
-    window.open(currentResume.url, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <div className="resume-download-container">
       <div className="resume-download-main">
@@ -79,7 +74,7 @@ const ResumeDownload = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="btn-content">
+          <span className="btn-content">
             {downloadStatus === "downloading" && (
               <i className="fas fa-spinner fa-spin"></i>
             )}
@@ -94,7 +89,7 @@ const ResumeDownload = () => {
               {downloadStatus === "error" && t("downloadError")}
               {!downloadStatus && t("downloadResume")}
             </span>
-          </div>
+          </span>
         </motion.button>
 
         {/* Options Toggle */}
@@ -146,24 +141,25 @@ const ResumeDownload = () => {
               <div className="option-group">
                 <h4>{t("alternatives")}</h4>
                 <div className="alternative-buttons">
-                  <button
+                  <a
                     className="alt-btn view-online"
-                    onClick={handleViewOnline}
+                    href={resumeFiles[language].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fas fa-eye"></i>
                     <span>{t("viewOnline")}</span>
-                  </button>
+                  </a>
 
-                  <button
+                  <a
                     className="alt-btn email-request"
-                    onClick={() =>
-                      (window.location.href =
-                        "mailto:rafajovaneli@gmail.com?subject=Resume Request&body=Hi Rafael, I would like to request your resume.")
-                    }
+                    href={`mailto:rafajovaneli@gmail.com?subject=${encodeURIComponent(
+                      t("resumeRequestSubject")
+                    )}&body=${encodeURIComponent(t("resumeRequestBody"))}`}
                   >
                     <i className="fas fa-envelope"></i>
                     <span>{t("requestByEmail")}</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

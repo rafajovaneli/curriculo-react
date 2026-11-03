@@ -2,29 +2,27 @@
   "name": "curriculo-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rafajovaneli.github.io/curriculo-react",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.7",
     "framer-motion": "^12.19.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:surge": "npm run build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build:surge": "cross-env PUBLIC_URL=/ react-scripts build"
+    "predeploy:surge": "npm run build",
+    "deploy:surge": "node -e \"require('fs').copyFileSync('build/index.html','build/200.html')\" && npx surge ./build rafaeljovaneli.surge.sh",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,7 +43,8 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^10.1.0",
-    "gh-pages": "^6.3.0"
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3"
   }
 }
