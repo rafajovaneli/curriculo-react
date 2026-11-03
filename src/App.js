@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "@fortawesome/fontawesome-free/css/all.css";
+import "./styles/icons.css";
 import { motion, MotionConfig } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./hooks/useTheme";

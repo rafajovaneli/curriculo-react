@@ -21,6 +21,7 @@ Currículo/portfólio em React, publicado em https://rafaeljovaneli.surge.sh.
 | `npm ci` | instala as dependências exatamente como no `package-lock.json` |
 | `npm start` | servidor de desenvolvimento |
 | `npm test` | testes em modo interativo (`CI=true npm test -- --watchAll=false` roda uma vez) |
+| `npm run icons` | regenera `src/styles/icons.css` (só os ícones Font Awesome usados); rode ao adicionar ou remover um ícone |
 | `npm run build` | build de produção na pasta `build/` (assume que o site fica na raiz do domínio) |
 | `npm run deploy:surge` | gera o build, cria o `200.html` e publica no Surge |
 
@@ -30,6 +31,7 @@ Currículo/portfólio em React, publicado em https://rafaeljovaneli.surge.sh.
 - `src/components`: seções e componentes reutilizáveis
 - `src/contexts/LanguageContext.js`: textos em PT-BR e EN, detecção e persistência do idioma
 - `src/hooks`: tema, scroll e animação
+- `src/styles/icons.css`: gerado por `scripts/build-icons.js` (não editar à mão)
 - `public`: PDFs do currículo, sitemap, `robots.txt`, manifesto e ícones
 
 ## Idioma e tema
