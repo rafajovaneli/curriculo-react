@@ -19,7 +19,7 @@
   --bg-tertiary: #e2e8f0;
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
-  --text-muted: #718096;
+  --text-muted: #4a5568; /* AA on white and tinted cards */
   --border-color: #e2e8f0;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --card-bg: rgba(255, 255, 255, 0.9);

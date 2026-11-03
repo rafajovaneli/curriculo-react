@@ -4624,3 +4624,52 @@ button.timeline-expand-icon:focus-visible {
 main:focus {
   outline: none;
 }
+
+/* Accessibility: WCAG AA text contrast on the light theme.
+   Decorative uses (borders, gradients) keep the original brand colors. */
+.light-theme .btn-primary,
+.light-theme .about-detail-title.primary,
+.light-theme .contact-hint,
+.light-theme .maps-link,
+.light-theme .timeline-period {
+  color: #4f46e5;
+}
+
+.light-theme .btn-primary {
+  border-color: #4f46e5;
+}
+
+.light-theme .btn-secondary,
+.light-theme .about-detail-title.accent {
+  color: #0e7490;
+}
+
+.light-theme .btn-secondary {
+  border-color: #0e7490;
+}
+
+.light-theme .about-detail-title.success {
+  color: #047857;
+}
+
+/* Light theme: the LinkedIn link lost its blue background to
+   `.professional-section * { background-color: transparent !important }`,
+   leaving white text on white. Restore it (white on #0077b5 = 4.7:1). */
+.light-theme .professional-section .simple-linkedin-link {
+  background-color: #0077b5 !important;
+  color: #fff;
+}
+
+.light-theme .professional-section .simple-linkedin-link:hover {
+  background-color: #005885 !important;
+  color: #fff;
+}
+
+.light-theme .professional-section .simple-linkedin-link i {
+  color: inherit;
+}
+
+/* White text on the resume button gradient: 6.3:1 to 7:1 instead of 3.7:1 */
+.light-theme .download-resume-btn.primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%);
+}
