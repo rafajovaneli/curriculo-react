@@ -4063,3 +4063,170 @@ main:focus {
   outline: 3px solid var(--primary-color);
   outline-offset: 4px;
 }
+
+/* ------------------------------------------------------------------
+   Mobile navigation, compact hero and availability badge.
+   Kept in one place and scoped (.navbar ...) because the earlier nav
+   rules are spread over the file and fight each other.
+   ------------------------------------------------------------------ */
+.nav-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.nav-menu-toggle:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Availability: the fact recruiters look for first, as a badge */
+.hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  font-weight: 600;
+}
+
+.hero-location::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.light-theme .hero-location {
+  color: #065f46;
+}
+
+@media (max-width: 768px) {
+  /* nav.navbar beats optimized.css (imported later) and Bootstrap's .navbar */
+  nav.navbar {
+    padding: 0;
+  }
+
+  .navbar .nav-container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: none;
+    min-height: 56px;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .navbar .nav-brand {
+    order: 1;
+  }
+
+  .navbar .nav-controls {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .nav-menu-toggle {
+    display: inline-flex;
+  }
+
+  .navbar .nav-center {
+    display: none;
+  }
+
+  .navbar .nav-center.open {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: auto;
+    margin: 0;
+    padding: 0.5rem 0.75rem 0.75rem;
+    overflow: visible;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--nav-bg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .navbar .nav-center.open button {
+    width: 100%;
+    min-height: 44px;
+    text-align: left;
+  }
+
+  .hero-section {
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-title-shell {
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
+  }
+
+  .hero-location {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-value-props {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-value-props span {
+    padding: 0.3rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .hero-buttons {
+    gap: 0.6rem;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-secondary,
+  .hero-buttons .btn-tertiary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* The stack is already in the eyebrow above the name; save the vertical space */
+  .hero-value-props span:nth-child(3) {
+    display: none;
+  }
+
+  /* 44px touch targets in the top bar */
+  .navbar .nav-brand,
+  .navbar .flag-toggle,
+  .navbar .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .navbar .nav-controls {
+    gap: 0.25rem;
+  }
+}

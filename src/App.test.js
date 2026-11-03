@@ -156,6 +156,57 @@ describe("App", () => {
   });
 });
 
+describe("mobile navigation and hero", () => {
+  test("menu button toggles the navigation list and closes on Escape", () => {
+    renderApp();
+
+    const toggle = screen.getByRole("button", { name: /abrir menu/i });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveAttribute("aria-controls", "primary-menu");
+
+    fireEvent.click(toggle);
+    expect(
+      screen.getByRole("button", { name: /fechar menu/i })
+    ).toHaveAttribute("aria-expanded", "true");
+    expect(document.getElementById("primary-menu")).toHaveClass("open");
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.getByRole("button", { name: /abrir menu/i })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+  });
+
+  test("choosing a menu item closes the menu", () => {
+    renderApp();
+
+    fireEvent.click(screen.getByRole("button", { name: /abrir menu/i }));
+    fireEvent.click(screen.getByRole("button", { name: /ir para a seção: skills/i }));
+
+    expect(document.getElementById("primary-menu")).not.toHaveClass("open");
+  });
+
+  test("hero offers CV, experience and contact actions", () => {
+    renderApp();
+
+    expect(screen.getByRole("link", { name: /baixar cv/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /ver experiência/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /falar comigo/i })
+    ).toBeInTheDocument();
+  });
+
+  test("floating contact button stays hidden until the visitor scrolls", () => {
+    renderApp();
+
+    expect(
+      document.querySelector(".floating-contact-btn")
+    ).not.toBeInTheDocument();
+  });
+});
+
 describe("accessibility (axe)", () => {
   // jsdom has no layout engine, so color-contrast is checked separately in a real browser.
   const axeOptions = { rules: { "color-contrast": { enabled: false } } };
@@ -177,6 +228,7 @@ describe("accessibility with everything expanded", () => {
   test("has no axe violations with download options, timeline and skills open", async () => {
     const { container } = renderApp();
 
+    fireEvent.click(screen.getByRole("button", { name: /abrir menu/i }));
     fireEvent.click(
       screen.getByRole("button", { name: /mais opções de download/i })
     );
