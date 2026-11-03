@@ -74,7 +74,7 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
         {
           name: "PostgreSQL",
           level: 80,
-          icon: "fas fa-elephant",
+          icon: "fas fa-table",
           color: "#336791",
         },
         { name: "MongoDB", level: 75, icon: "fas fa-leaf", color: "#47a248" },
@@ -144,34 +144,39 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
             viewport={{ once: true }}
             className="unified-card"
           >
-            {/* Category Header - Clickable */}
+            {/* Category header: heading wraps the toggle button (accordion pattern) */}
+            <h4 className="skill-category-heading">
               <button
                 type="button"
                 className="skill-category-toggle"
                 onClick={() => toggleCategory(categoryIndex)}
                 aria-expanded={Boolean(expandedCategories[categoryIndex])}
+                aria-controls={`skill-list-${categoryIndex}`}
               >
-                <div>
-                  <h4 className="skill-category-title">{category.title}</h4>
-                  <div className="skill-category-underline"></div>
-                </div>
+                <span className="skill-category-label">
+                  <span className="skill-category-title">{category.title}</span>
+                  <span className="skill-category-underline"></span>
+                </span>
 
                 {/* Expand/Collapse Icon */}
-                <motion.div
+                <motion.span
                   animate={{
                     rotate: expandedCategories[categoryIndex] ? 180 : 0,
                   }}
                   transition={{ duration: 0.3 }}
                   className="skill-category-chevron"
+                  aria-hidden="true"
                 >
                   <i className="fas fa-chevron-down"></i>
-                </motion.div>
+                </motion.span>
               </button>
+            </h4>
 
             {/* Skills List */}
             <AnimatePresence>
               {expandedCategories[categoryIndex] && (
                 <motion.div
+                  id={`skill-list-${categoryIndex}`}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
@@ -207,7 +212,7 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="skill-progress-track">
+                        <div className="skill-progress-track" aria-hidden="true">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.level}%` }}

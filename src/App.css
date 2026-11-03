@@ -4685,3 +4685,25 @@ main:focus {
     scroll-behavior: auto !important;
   }
 }
+
+/* Skills accordion: heading wraps the toggle button, so the pieces inside are inline */
+.skill-category-heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.skill-category-label,
+.skill-category-title,
+.skill-category-underline {
+  display: block;
+}
+
+.skill-category-chevron {
+  display: inline-block;
+}
+
+.skill-category-toggle:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}

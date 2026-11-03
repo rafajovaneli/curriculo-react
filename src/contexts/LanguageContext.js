@@ -142,7 +142,6 @@ export const translations = {
 
     // Footer
     footerText: "Rafael H. Jovaneli - Desenvolvedor Java Senior",
-    builtWith: "Construído com React.js e Chart.js",
   },
 
   en: {
@@ -266,7 +265,6 @@ export const translations = {
 
     // Footer
     footerText: "Rafael H. Jovaneli - Senior Java Developer",
-    builtWith: "Built with React.js and Chart.js",
   },
 };
 
