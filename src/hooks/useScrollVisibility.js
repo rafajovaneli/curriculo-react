@@ -24,7 +24,7 @@ export const useScrollVisibility = (threshold = 300) => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Check initial scroll position
     toggleVisibility();
