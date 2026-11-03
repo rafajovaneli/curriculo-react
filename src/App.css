@@ -4603,3 +4603,10 @@ html {
     padding-bottom: 0.95rem;
   }
 }
+
+/* Accessibility: AA contrast for the tertiary button on the light theme */
+.light-theme .btn-tertiary {
+  color: #c2005e;
+  border-color: #c2005e;
+  text-shadow: none;
+}
