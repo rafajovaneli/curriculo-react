@@ -145,7 +145,7 @@ const Experiencias = memo(function Experiencias() {
       },
       {
         empresa: "Developer K2 - Cliente Sura Seguros",
-        periodo: "Junho 2018 – Fevereiro 2021",
+        periodo: "Junho 2018 – Março 2021",
         resumo:
           "Soluções para seguros Property e Auto com Java Web, cloud e sustentação enterprise.",
         stack: ["Java", "Spring Boot", "AWS", "Azure", "SQL Server"],
@@ -167,6 +167,30 @@ const Experiencias = memo(function Experiencias() {
           "Experiência com Banco de Dados SQL Server, PL/SQL.",
           "Evidência de testes unitários (JUnit).",
           "Experiência em JAVA WEB tendo atuado com tecnologias como JavaScript, Json, JQuery, Spring Boot, JSF PrimeFaces, JSP, HTML.",
+        ],
+      },
+      {
+        empresa: "Developer GFT Group - Cliente Bradesco",
+        periodo: "Janeiro 2018 – Julho 2018",
+        resumo:
+          "Desenvolvimento Java Web em ambiente bancário, com ajuste de telas e Beans.",
+        stack: ["Java", "JSF PrimeFaces", "JSP", "JavaScript", "jQuery"],
+        contexto: "Banco",
+        destaques: [
+          "Desenvolvimento e ajuste de telas e Beans em Java Web.",
+          "Experiência com servidores Java: Tomcat, JBoss, Weblogic, Websphere e VRaptor.",
+        ],
+        atividades: [
+          "Experiência com metodologias ágeis (Scrum, Agile, Kanban).",
+          "Experiência com servidores de aplicação Java: Tomcat, Jboss, Weblogic, Websphere e VRaptor.",
+          "Experiência de arquitetura em soluções Web.",
+          "Experiência de desenvolvimento em projetos Web.",
+          "Desenvolvimento focado em ambiente AWB.",
+          "Uso de CWS e PDC.",
+          "Desenvolvimento e ajuste em telas.",
+          "Desenvolvimento e ajuste de Beans.",
+          "Evidência de testes unitários e integrados.",
+          "Experiência em JAVA WEB, tendo trabalhado com tecnologias como JavaScript, Json, JQuery, JSF PrimeFaces, JSP, HTML e XML.",
         ],
       },
     ],
@@ -297,7 +321,7 @@ const Experiencias = memo(function Experiencias() {
       },
       {
         empresa: "Developer K2 - Sura Insurance Client",
-        periodo: "June 2018 – February 2021",
+        periodo: "June 2018 – March 2021",
         resumo:
           "Insurance solutions for Property and Auto with Java Web, cloud and enterprise support.",
         stack: ["Java", "Spring Boot", "AWS", "Azure", "SQL Server"],
@@ -319,6 +343,30 @@ const Experiencias = memo(function Experiencias() {
           "Experience with SQL Server Database, PL/SQL.",
           "Evidence of unit testing (JUnit).",
           "Experience in JAVA WEB having worked with technologies such as JavaScript, Json, JQuery, Spring Boot, JSF PrimeFaces, JSP, HTML.",
+        ],
+      },
+      {
+        empresa: "Developer GFT Group - Bradesco Client",
+        periodo: "January 2018 – July 2018",
+        resumo:
+          "Java Web development in a banking environment, including screen and Bean adjustments.",
+        stack: ["Java", "JSF PrimeFaces", "JSP", "JavaScript", "jQuery"],
+        contexto: "Banking",
+        destaques: [
+          "Development and adjustment of screens and Beans in Java Web.",
+          "Experience with Java application servers: Tomcat, JBoss, Weblogic, Websphere and VRaptor.",
+        ],
+        atividades: [
+          "Experience with agile methodologies (Scrum, Agile, Kanban).",
+          "Experience with Java application servers: Tomcat, JBoss, Weblogic, Websphere and VRaptor.",
+          "Architectural experience in Web solutions.",
+          "Development experience in Web projects.",
+          "Development focused on the AWB environment.",
+          "Use of CWS and PDC.",
+          "Development and adjustments on screens.",
+          "Development and adjustment of Beans.",
+          "Evidence of unit and integrated testing.",
+          "Experience in JAVA WEB, having worked with technologies such as JavaScript, JSON, JQuery, JSF PrimeFaces, JSP, HTML and XML.",
         ],
       },
     ],
