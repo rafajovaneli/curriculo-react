@@ -1,6 +1,5 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import React, { useEffect, useState } from "react";
+import "./styles/icons.css";
 import { motion, MotionConfig } from "framer-motion";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./hooks/useTheme";
@@ -24,6 +23,22 @@ function AppContent() {
   const { language, toggleLanguage, t } = useLanguage();
   const { scrollTo, scrollToTop } = useSmoothScroll();
   const showBackToTop = useScrollVisibility(400);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the mobile menu with Escape.
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const goTo = (sectionId) => {
+    setMenuOpen(false);
+    scrollTo(sectionId);
+  };
 
   return (
     <>
@@ -90,7 +105,6 @@ function AppContent() {
               >
                 <span>{t("heroValue1")}</span>
                 <span>{t("heroValue2")}</span>
-                <span>{t("heroValue3")}</span>
               </motion.div>
 
               <motion.div
@@ -119,9 +133,9 @@ function AppContent() {
                 </button>
                 <button
                   className="btn-tertiary hover-lift"
-                  onClick={() => scrollTo("professional")}
+                  onClick={() => scrollTo("contact")}
                 >
-                  {t("professionalLinks")}
+                  {t("heroContactCta")}
                 </button>
               </motion.div>
             </motion.div>
@@ -147,11 +161,14 @@ function AppContent() {
               RHJ
             </button>
 
-            <ul className="nav-center">
+            <ul
+              id="primary-menu"
+              className={`nav-center${menuOpen ? " open" : ""}`}
+            >
               <li>
                 <button
                   type="button"
-                  onClick={() => scrollTo("about")}
+                  onClick={() => goTo("about")}
                   aria-label={`${t("navigateToSection")}: ${t("about")}`}
                 >
                   {t("about")}
@@ -160,7 +177,7 @@ function AppContent() {
               <li>
                 <button
                   type="button"
-                  onClick={() => scrollTo("skills")}
+                  onClick={() => goTo("skills")}
                   aria-label={`${t("navigateToSection")}: ${t("skills")}`}
                 >
                   {t("skills")}
@@ -169,7 +186,7 @@ function AppContent() {
               <li>
                 <button
                   type="button"
-                  onClick={() => scrollTo("experience")}
+                  onClick={() => goTo("experience")}
                   aria-label={`${t("navigateToSection")}: ${t("experience")}`}
                 >
                   {t("experience")}
@@ -178,7 +195,7 @@ function AppContent() {
               <li>
                 <button
                   type="button"
-                  onClick={() => scrollTo("contact")}
+                  onClick={() => goTo("contact")}
                   aria-label={`${t("navigateToSection")}: ${t("contact")}`}
                 >
                   {t("contact")}
@@ -187,6 +204,20 @@ function AppContent() {
             </ul>
 
             <div className="nav-controls">
+              <button
+                type="button"
+                className="nav-menu-toggle"
+                onClick={() => setMenuOpen((open) => !open)}
+                aria-expanded={menuOpen}
+                aria-controls="primary-menu"
+                aria-label={menuOpen ? t("menuClose") : t("menuOpen")}
+              >
+                <i
+                  className={`fas ${menuOpen ? "fa-xmark" : "fa-bars"}`}
+                  aria-hidden="true"
+                ></i>
+              </button>
+
               <button
                 className="flag-toggle"
                 onClick={toggleLanguage}
@@ -208,7 +239,7 @@ function AppContent() {
                 aria-label={getThemeLabel()}
               >
                 <span className="theme-icon" aria-hidden="true">
-                  {getThemeIcon()}
+                  <i className={`fas ${getThemeIcon()}`}></i>
                 </span>
               </button>
             </div>
@@ -331,7 +362,8 @@ function AppContent() {
 
         </main>
 
-        {/* Floating Contact Button */}
+        {/* Floating Contact Button (hidden over the hero, which already has a contact CTA) */}
+        {showBackToTop && (
         <button
           className="floating-contact-btn"
           onClick={() => scrollTo("contact")}
@@ -340,6 +372,7 @@ function AppContent() {
         >
           <i className="fas fa-envelope"></i>
         </button>
+        )}
 
         {/* Back to Top Button */}
         {showBackToTop && (

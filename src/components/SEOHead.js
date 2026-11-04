@@ -93,10 +93,8 @@ const SEOHead = ({
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />
-      <meta name="twitter:creator" content="@rafajovaneli" />
 
       {/* Additional Performance and SEO */}
-      <meta name="theme-color" content="#000000" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="format-detection" content="telephone=no" />
 

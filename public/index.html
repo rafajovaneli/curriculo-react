@@ -54,27 +54,28 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Rafael Jovaneli",
-        "jobTitle": "Senior Java Developer",
-        "description": "Senior Java Developer com experiencia em arquiteturas modernas, cloud e desenvolvimento web",
-        "url": "https://rafaeljovaneli.surge.sh",
-        "sameAs": [
-          "https://github.com/rafajovaneli",
-          "https://www.linkedin.com/in/rafael-jovaneli-a495b420"
-        ]
-      }
-    </script>
 
     <title>
       Rafael Jovaneli - Senior Java Developer
     </title>
   </head>
   <body>
+    <script>
+      // Apply the saved/system theme before first paint to avoid a light flash.
+      (function () {
+        try {
+          var mode = localStorage.getItem("themeMode") || "auto";
+          var dark =
+            mode === "dark" ||
+            (mode === "auto" &&
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          var cls = dark ? "dark-theme" : "light-theme";
+          document.documentElement.className = cls;
+          document.body.className = cls;
+        } catch (e) {}
+      })();
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

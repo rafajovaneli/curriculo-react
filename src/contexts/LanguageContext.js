@@ -33,6 +33,10 @@ export const translations = {
     themeLight: "Tema claro",
     themeDark: "Tema escuro",
     loadError: "Não foi possível carregar esta seção.",
+    moreDownloadOptions: "Mais opções de download",
+    menuOpen: "Abrir menu",
+    menuClose: "Fechar menu",
+    heroContactCta: "Falar comigo",
     // Navigation
     about: "Sobre",
     skills: "Skills",
@@ -47,20 +51,19 @@ export const translations = {
     experiences: "Experiências",
     downloadResumeShort: "Baixar CV",
     viewExperienceShort: "Ver Experiência",
-    heroValue1: "6+ anos em produtos enterprise",
+    heroValue1: "8+ anos em produtos enterprise",
     heroValue2: "Experiência em bancos, seguros e fintechs",
-    heroValue3: "Stack principal: Java, Spring Boot, AWS e Kafka",
 
     // About Section
     aboutTitle: "Sobre Mim",
-    achievementExperience: "6+ Anos de Experiência",
+    achievementExperience: "8+ Anos de Experiência",
     achievementCorporations: "Grandes Corporações",
     achievementLeadership: "Liderança de Equipes",
-    achievementInternational: "Experiência Internacional",
+    achievementEnglish: "Inglês Fluente",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Arquiteturas modernas, integrações e ambientes de missão crítica",
     aboutDescription:
-      "Desenvolvedor Java Senior com mais de 6 anos de experiência em sistemas corporativos, atuando na entrega de integrações, melhorias de plataformas críticas e soluções escaláveis para negócios regulados.",
+      "Desenvolvedor Java Senior com mais de 8 anos de experiência em sistemas corporativos, atuando na entrega de integrações, melhorias de plataformas críticas e soluções escaláveis para negócios regulados.",
     corporateExperience: "Experiência Corporativa",
     corporateDescription:
       "Atuação em projetos para Bradesco, Santander, SOMPO Seguros, Ame Digital e outros grandes clientes, com foco em estabilidade, evolução de produtos e entregas em ambientes enterprise.",
@@ -96,6 +99,7 @@ export const translations = {
     experienceStackLabel: "Stack",
     experienceDomainLabel: "Contexto",
     experienceHighlightsLabel: "Destaques",
+    experienceResultLabel: "Resultado:",
     experienceExpandLabel: "Ver detalhes",
     experienceCollapseLabel: "Ocultar detalhes",
 
@@ -142,7 +146,6 @@ export const translations = {
 
     // Footer
     footerText: "Rafael H. Jovaneli - Desenvolvedor Java Senior",
-    builtWith: "Construído com React.js e Chart.js",
   },
 
   en: {
@@ -157,6 +160,10 @@ export const translations = {
     themeLight: "Light theme",
     themeDark: "Dark theme",
     loadError: "Could not load this section.",
+    moreDownloadOptions: "More download options",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    heroContactCta: "Get in touch",
     // Navigation
     about: "About",
     skills: "Skills",
@@ -171,20 +178,19 @@ export const translations = {
     experiences: "Experience",
     downloadResumeShort: "Download Resume",
     viewExperienceShort: "View Experience",
-    heroValue1: "6+ years building enterprise software",
+    heroValue1: "8+ years building enterprise software",
     heroValue2: "Experience across banking, insurance, and fintech",
-    heroValue3: "Core stack: Java, Spring Boot, AWS, and Kafka",
 
     // About Section
     aboutTitle: "About Me",
-    achievementExperience: "6+ Years Experience",
+    achievementExperience: "8+ Years Experience",
     achievementCorporations: "Large Corporations",
     achievementLeadership: "Team Leadership",
-    achievementInternational: "International Experience",
+    achievementEnglish: "Fluent English",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Modern architectures, integrations, and mission-critical environments",
     aboutDescription:
-      "Senior Java Developer with over 6 years of experience building enterprise systems, delivering integrations, platform enhancements, and scalable solutions for regulated industries.",
+      "Senior Java Developer with over 8 years of experience building enterprise systems, delivering integrations, platform enhancements, and scalable solutions for regulated industries.",
     corporateExperience: "Corporate Experience",
     corporateDescription:
       "Delivered projects for Bradesco, Santander, SOMPO Insurance, Ame Digital, and other large clients, with a strong focus on stability, product evolution, and dependable enterprise delivery.",
@@ -220,6 +226,7 @@ export const translations = {
     experienceStackLabel: "Stack",
     experienceDomainLabel: "Context",
     experienceHighlightsLabel: "Highlights",
+    experienceResultLabel: "Result:",
     experienceExpandLabel: "View details",
     experienceCollapseLabel: "Hide details",
 
@@ -266,7 +273,6 @@ export const translations = {
 
     // Footer
     footerText: "Rafael H. Jovaneli - Senior Java Developer",
-    builtWith: "Built with React.js and Chart.js",
   },
 };
 

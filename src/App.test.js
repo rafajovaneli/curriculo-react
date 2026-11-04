@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
+import { axe } from "jest-axe";
 import App from "./App";
 import { detectInitialLanguage, translations } from "./contexts/LanguageContext";
 
@@ -152,6 +153,97 @@ describe("App", () => {
     });
     expect(expandedToggle).toHaveAttribute("aria-expanded", "true");
     expect(document.getElementById(panelId)).toBeInTheDocument();
+  });
+});
+
+describe("mobile navigation and hero", () => {
+  test("menu button toggles the navigation list and closes on Escape", () => {
+    renderApp();
+
+    const toggle = screen.getByRole("button", { name: /abrir menu/i });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveAttribute("aria-controls", "primary-menu");
+
+    fireEvent.click(toggle);
+    expect(
+      screen.getByRole("button", { name: /fechar menu/i })
+    ).toHaveAttribute("aria-expanded", "true");
+    expect(document.getElementById("primary-menu")).toHaveClass("open");
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.getByRole("button", { name: /abrir menu/i })).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+  });
+
+  test("choosing a menu item closes the menu", () => {
+    renderApp();
+
+    fireEvent.click(screen.getByRole("button", { name: /abrir menu/i }));
+    fireEvent.click(screen.getByRole("button", { name: /ir para a seção: skills/i }));
+
+    expect(document.getElementById("primary-menu")).not.toHaveClass("open");
+  });
+
+  test("hero offers CV, experience and contact actions", () => {
+    renderApp();
+
+    expect(screen.getByRole("link", { name: /baixar cv/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /ver experiência/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /falar comigo/i })
+    ).toBeInTheDocument();
+  });
+
+  test("floating contact button stays hidden until the visitor scrolls", () => {
+    renderApp();
+
+    expect(
+      document.querySelector(".floating-contact-btn")
+    ).not.toBeInTheDocument();
+  });
+});
+
+describe("accessibility (axe)", () => {
+  // jsdom has no layout engine, so color-contrast is checked separately in a real browser.
+  const axeOptions = { rules: { "color-contrast": { enabled: false } } };
+
+  test.each([
+    ["pt", "Portuguese"],
+    ["en", "English"],
+  ])("has no axe violations in %s (%s)", async (language) => {
+    window.localStorage.setItem("language", language);
+    const { container } = renderApp();
+
+    const results = await axe(container, axeOptions);
+
+    expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
+  });
+});
+
+describe("accessibility with everything expanded", () => {
+  test("has no axe violations with download options, timeline and skills open", async () => {
+    const { container } = renderApp();
+
+    fireEvent.click(screen.getByRole("button", { name: /abrir menu/i }));
+    fireEvent.click(
+      screen.getByRole("button", { name: /mais opções de download/i })
+    );
+    screen
+      .getAllByRole("button", { name: /ver detalhes/i })
+      .forEach((button) => fireEvent.click(button));
+    container
+      .querySelectorAll("button.skill-category-toggle")
+      .forEach((button) => fireEvent.click(button));
+
+    const results = await axe(container, {
+      rules: { "color-contrast": { enabled: false } },
+    });
+
+    expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
   });
 });
 

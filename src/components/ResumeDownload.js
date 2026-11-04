@@ -94,12 +94,19 @@ const ResumeDownload = () => {
 
         {/* Options Toggle */}
         <motion.button
+          type="button"
           className="download-options-toggle"
           onClick={() => setShowOptions(!showOptions)}
+          aria-label={t("moreDownloadOptions")}
+          aria-expanded={showOptions}
+          aria-controls="download-options-panel"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <i className={`fas fa-chevron-${showOptions ? "up" : "down"}`}></i>
+          <i
+            className={`fas fa-chevron-${showOptions ? "up" : "down"}`}
+            aria-hidden="true"
+          ></i>
         </motion.button>
       </div>
 
@@ -107,6 +114,7 @@ const ResumeDownload = () => {
       <AnimatePresence>
         {showOptions && (
           <motion.div
+            id="download-options-panel"
             className="download-options"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
@@ -116,7 +124,7 @@ const ResumeDownload = () => {
             <div className="options-grid">
               {/* Language Options */}
               <div className="option-group">
-                <h4>{t("chooseLanguage")}</h4>
+                <h3>{t("chooseLanguage")}</h3>
                 <div className="language-buttons">
                   {Object.entries(resumeFiles).map(([lang, resume]) => (
                     <button
@@ -139,7 +147,7 @@ const ResumeDownload = () => {
 
               {/* Alternative Actions */}
               <div className="option-group">
-                <h4>{t("alternatives")}</h4>
+                <h3>{t("alternatives")}</h3>
                 <div className="alternative-buttons">
                   <a
                     className="alt-btn view-online"

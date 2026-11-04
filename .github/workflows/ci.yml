@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test
+        run: npm test -- --watchAll=false
+        env:
+          CI: "true"
+
+      - name: Build (warnings fail the build when CI=true)
+        run: npm run build
+        env:
+          CI: "true"
+
+      - name: Check that the resume PDFs ship with the build
+        run: |
+          test -s build/CV_RAFAEL_JOVANELI_PT.pdf
+          test -s build/CV_RAFAEL_JOVANELI_EN.pdf
+          test -s build/sitemap.xml
