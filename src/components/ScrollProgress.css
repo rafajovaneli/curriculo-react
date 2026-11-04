@@ -11,9 +11,9 @@
 
 .scroll-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1 0%, #06b6d4 50%, #10b981 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 50%, var(--accent) 100%);
   transition: width 0.1s ease-out;
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Dark theme */
@@ -22,8 +22,8 @@
 }
 
 .dark-theme .scroll-progress-bar {
-  background: linear-gradient(90deg, #00ff41 0%, #0ff 50%, #ff0080 100%);
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 50%, var(--accent) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Animation */
@@ -46,7 +46,7 @@
       rgba(255, 255, 255, 0.3),
       transparent
     );
-    animation: shimmer 2s infinite;
+    animation: none;
   }
 }
 

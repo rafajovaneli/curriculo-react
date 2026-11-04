@@ -53,14 +53,13 @@ export const translations = {
     viewExperienceShort: "Ver Experiência",
     heroValue1: "6+ anos em produtos enterprise",
     heroValue2: "Experiência em bancos, seguros e fintechs",
-    heroValue3: "Stack principal: Java, Spring Boot, AWS e Kafka",
 
     // About Section
     aboutTitle: "Sobre Mim",
     achievementExperience: "6+ Anos de Experiência",
     achievementCorporations: "Grandes Corporações",
     achievementLeadership: "Liderança de Equipes",
-    achievementInternational: "Experiência Internacional",
+    achievementEnglish: "Inglês Fluente",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Arquiteturas modernas, integrações e ambientes de missão crítica",
     aboutDescription:
@@ -181,14 +180,13 @@ export const translations = {
     viewExperienceShort: "View Experience",
     heroValue1: "6+ years building enterprise software",
     heroValue2: "Experience across banking, insurance, and fintech",
-    heroValue3: "Core stack: Java, Spring Boot, AWS, and Kafka",
 
     // About Section
     aboutTitle: "About Me",
     achievementExperience: "6+ Years Experience",
     achievementCorporations: "Large Corporations",
     achievementLeadership: "Team Leadership",
-    achievementInternational: "International Experience",
+    achievementEnglish: "Fluent English",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Modern architectures, integrations, and mission-critical environments",
     aboutDescription:

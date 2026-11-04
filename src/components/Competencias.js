@@ -9,32 +9,26 @@ const Competencias = memo(function Competencias() {
     {
       icon: "fas fa-language",
       text: t("competenciaLanguages"),
-      color: "#6366f1",
     },
     {
       icon: "fab fa-java",
       text: t("competenciaJava"),
-      color: "#f59e0b",
     },
     {
       icon: "fas fa-cogs",
       text: t("competenciaReactive"),
-      color: "#10b981",
     },
     {
       icon: "fas fa-tasks",
       text: t("competenciaAgile"),
-      color: "#06b6d4",
     },
     {
       icon: "fas fa-user-check",
       text: t("competenciaCommunication"),
-      color: "#8b5cf6",
     },
     {
       icon: "fas fa-users-cog",
       text: t("competenciaLeadership"),
-      color: "#ef4444",
     },
   ];
 
@@ -73,9 +67,6 @@ const Competencias = memo(function Competencias() {
               {/* Icon Container */}
               <div
                 className="competency-icon"
-                style={{
-                  "--competency-accent": comp.color,
-                }}
               >
                 <i className={comp.icon}></i>
               </div>

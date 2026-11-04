@@ -9,22 +9,18 @@ function Sintese() {
     {
       icon: "fas fa-trophy",
       text: t("achievementExperience"),
-      color: "#f59e0b",
     },
     {
       icon: "fas fa-building",
       text: t("achievementCorporations"),
-      color: "#3b82f6",
     },
     {
       icon: "fas fa-users",
       text: t("achievementLeadership"),
-      color: "#10b981",
     },
     {
       icon: "fas fa-globe",
-      text: t("achievementInternational"),
-      color: "#8b5cf6",
+      text: t("achievementEnglish"),
     },
   ];
 
@@ -54,7 +50,6 @@ function Sintese() {
           >
             <i
               className={`${achievement.icon} achievement-icon`}
-              style={{ "--achievement-accent": achievement.color }}
             ></i>
             <span className="achievement-text">{achievement.text}</span>
           </motion.div>

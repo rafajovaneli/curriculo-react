@@ -19,46 +19,41 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
     {
       title: t("skillCategoryBackend"),
       skills: [
-        { name: "Java", level: 95, icon: "fab fa-java", color: "#f89820" },
+        { name: "Java", level: 95, icon: "fab fa-java" },
         {
           name: "Spring Boot",
           level: 90,
           icon: "fas fa-leaf",
-          color: "#6db33f",
         },
         {
           name: "Spring WebFlux",
           level: 85,
           icon: "fas fa-stream",
-          color: "#6db33f",
         },
         {
           name: "Hibernate/JPA",
           level: 88,
           icon: "fas fa-database",
-          color: "#59666c",
         },
-        { name: "Maven", level: 85, icon: "fas fa-cube", color: "#c71a36" },
-        { name: "Gradle", level: 82, icon: "fas fa-cogs", color: "#02303a" },
+        { name: "Maven", level: 85, icon: "fas fa-cube" },
+        { name: "Gradle", level: 82, icon: "fas fa-cogs" },
       ],
     },
     {
       title: t("skillCategoryCloud"),
       skills: [
-        { name: "AWS", level: 75, icon: "fab fa-aws", color: "#ff9900" },
-        { name: "Docker", level: 80, icon: "fab fa-docker", color: "#2496ed" },
-        { name: "Jenkins", level: 78, icon: "fas fa-tools", color: "#d33833" },
+        { name: "AWS", level: 75, icon: "fab fa-aws" },
+        { name: "Docker", level: 80, icon: "fab fa-docker" },
+        { name: "Jenkins", level: 78, icon: "fas fa-tools" },
         {
           name: "Kubernetes",
           level: 70,
           icon: "fas fa-dharmachakra",
-          color: "#326ce5",
         },
         {
           name: "OpenShift",
           level: 72,
           icon: "fas fa-server",
-          color: "#ee0000",
         },
       ],
     },
@@ -69,52 +64,47 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
           name: "SQL Server",
           level: 85,
           icon: "fas fa-database",
-          color: "#cc2927",
         },
         {
           name: "PostgreSQL",
           level: 80,
           icon: "fas fa-table",
-          color: "#336791",
         },
-        { name: "MongoDB", level: 75, icon: "fas fa-leaf", color: "#47a248" },
-        { name: "Kafka", level: 78, icon: "fas fa-stream", color: "#231f20" },
-        { name: "Redis", level: 73, icon: "fas fa-memory", color: "#dc382d" },
+        { name: "MongoDB", level: 75, icon: "fas fa-leaf" },
+        { name: "Kafka", level: 78, icon: "fas fa-stream" },
+        { name: "Redis", level: 73, icon: "fas fa-memory" },
       ],
     },
     {
       title: t("skillCategoryFrontend"),
       skills: [
-        { name: "React", level: 70, icon: "fab fa-react", color: "#61dafb" },
+        { name: "React", level: 70, icon: "fab fa-react" },
         {
           name: "JavaScript",
           level: 82,
           icon: "fab fa-js-square",
-          color: "#f7df1e",
         },
         {
           name: "Angular",
           level: 65,
           icon: "fab fa-angular",
-          color: "#dd0031",
         },
         {
           name: "JSF PrimeFaces",
           level: 85,
           icon: "fas fa-code",
-          color: "#007acc",
         },
-        { name: "HTML/CSS", level: 80, icon: "fab fa-html5", color: "#e34f26" },
+        { name: "HTML/CSS", level: 80, icon: "fab fa-html5" },
       ],
     },
     {
       title: t("skillCategoryVersion"),
       skills: [
-        { name: "Git", level: 85, icon: "fab fa-git-alt", color: "#f05032" },
-        { name: "GitHub", level: 83, icon: "fab fa-github", color: "#181717" },
-        { name: "GitLab", level: 80, icon: "fab fa-gitlab", color: "#fc6d26" },
-        { name: "JUnit", level: 88, icon: "fas fa-vial", color: "#25a162" },
-        { name: "Mockito", level: 82, icon: "fas fa-flask", color: "#25a162" },
+        { name: "Git", level: 85, icon: "fab fa-git-alt" },
+        { name: "GitHub", level: 83, icon: "fab fa-github" },
+        { name: "GitLab", level: 80, icon: "fab fa-gitlab" },
+        { name: "JUnit", level: 88, icon: "fas fa-vial" },
+        { name: "Mockito", level: 82, icon: "fas fa-flask" },
       ],
     },
   ];
@@ -198,9 +188,6 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                       {/* Skill Icon */}
                       <div
                         className="skill-icon-shell"
-                        style={{
-                          "--skill-accent": skill.color,
-                        }}
                       >
                         <i className={skill.icon}></i>
                       </div>
@@ -224,9 +211,6 @@ const GraficoTecnologias = memo(function GraficoTecnologias() {
                             }}
                             viewport={{ once: true }}
                             className="skill-progress-bar"
-                            style={{
-                              "--skill-accent": skill.color,
-                            }}
                           />
                         </div>
                       </div>

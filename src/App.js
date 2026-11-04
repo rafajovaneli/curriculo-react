@@ -105,7 +105,6 @@ function AppContent() {
               >
                 <span>{t("heroValue1")}</span>
                 <span>{t("heroValue2")}</span>
-                <span>{t("heroValue3")}</span>
               </motion.div>
 
               <motion.div
@@ -240,7 +239,7 @@ function AppContent() {
                 aria-label={getThemeLabel()}
               >
                 <span className="theme-icon" aria-hidden="true">
-                  {getThemeIcon()}
+                  <i className={`fas ${getThemeIcon()}`}></i>
                 </span>
               </button>
             </div>

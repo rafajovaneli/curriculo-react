@@ -93,13 +93,13 @@ export const useTheme = () => {
   const getThemeIcon = () => {
     switch (themeMode) {
       case "light":
-        return "☀️";
+        return "fa-sun";
       case "dark":
-        return "🌙";
+        return "fa-moon";
       case "auto":
-        return "🌓";
+        return "fa-circle-half-stroke";
       default:
-        return "🌓";
+        return "fa-circle-half-stroke";
     }
   };
 
