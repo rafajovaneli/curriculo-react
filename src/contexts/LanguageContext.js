@@ -51,19 +51,19 @@ export const translations = {
     experiences: "Experiências",
     downloadResumeShort: "Baixar CV",
     viewExperienceShort: "Ver Experiência",
-    heroValue1: "6+ anos em produtos enterprise",
+    heroValue1: "8+ anos em produtos enterprise",
     heroValue2: "Experiência em bancos, seguros e fintechs",
 
     // About Section
     aboutTitle: "Sobre Mim",
-    achievementExperience: "6+ Anos de Experiência",
+    achievementExperience: "8+ Anos de Experiência",
     achievementCorporations: "Grandes Corporações",
     achievementLeadership: "Liderança de Equipes",
     achievementEnglish: "Inglês Fluente",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Arquiteturas modernas, integrações e ambientes de missão crítica",
     aboutDescription:
-      "Desenvolvedor Java Senior com mais de 6 anos de experiência em sistemas corporativos, atuando na entrega de integrações, melhorias de plataformas críticas e soluções escaláveis para negócios regulados.",
+      "Desenvolvedor Java Senior com mais de 8 anos de experiência em sistemas corporativos, atuando na entrega de integrações, melhorias de plataformas críticas e soluções escaláveis para negócios regulados.",
     corporateExperience: "Experiência Corporativa",
     corporateDescription:
       "Atuação em projetos para Bradesco, Santander, SOMPO Seguros, Ame Digital e outros grandes clientes, com foco em estabilidade, evolução de produtos e entregas em ambientes enterprise.",
@@ -178,19 +178,19 @@ export const translations = {
     experiences: "Experience",
     downloadResumeShort: "Download Resume",
     viewExperienceShort: "View Experience",
-    heroValue1: "6+ years building enterprise software",
+    heroValue1: "8+ years building enterprise software",
     heroValue2: "Experience across banking, insurance, and fintech",
 
     // About Section
     aboutTitle: "About Me",
-    achievementExperience: "6+ Years Experience",
+    achievementExperience: "8+ Years Experience",
     achievementCorporations: "Large Corporations",
     achievementLeadership: "Team Leadership",
     achievementEnglish: "Fluent English",
     roleTitle: "Senior Java Developer",
     roleSubtitle: "Modern architectures, integrations, and mission-critical environments",
     aboutDescription:
-      "Senior Java Developer with over 6 years of experience building enterprise systems, delivering integrations, platform enhancements, and scalable solutions for regulated industries.",
+      "Senior Java Developer with over 8 years of experience building enterprise systems, delivering integrations, platform enhancements, and scalable solutions for regulated industries.",
     corporateExperience: "Corporate Experience",
     corporateDescription:
       "Delivered projects for Bradesco, Santander, SOMPO Insurance, Ame Digital, and other large clients, with a strong focus on stability, product evolution, and dependable enterprise delivery.",
